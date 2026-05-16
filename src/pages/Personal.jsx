@@ -63,8 +63,8 @@ const CATEGORIES = [
     images: [
       "https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80",
       "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=400&q=80",
-      "https://images.unsplash.com/photo-1588776814546-1ffbb8b9e48d?w=400&q=80",
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&q=80",
+      "https://images.unsplash.com/photo-1617897903246-719242758050?w=400&q=80",
+      "https://images.unsplash.com/photo-1594462756698-1e89aa42aed0?w=400&q=80",
     ],
   },
   {
@@ -75,10 +75,10 @@ const CATEGORIES = [
     rotate: -2.5,
     size: "small",
     images: [
-      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=80",
-      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&q=80",
-      "https://images.unsplash.com/photo-1575364289537-669f78fce15e?w=400&q=80",
-      "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=400&q=80",
+      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&q=80",
+      "https://images.unsplash.com/photo-1531315396756-905d68d21b56?w=400&q=80",
+      "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?w=400&q=80",
+      "https://images.unsplash.com/photo-1584466977773-e625c37cdd50?w=400&q=80",
     ],
   },
   {
@@ -189,16 +189,25 @@ const SIZE_MAP = {
 function CategoryTile({ cat, index }) {
   const [hovered, setHovered] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
+  const [validSrcs, setValidSrcs] = useState(cat.images);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const sizeStyle = SIZE_MAP[cat.size];
 
+  const dropImage = (src) => {
+    setValidSrcs((prev) => prev.filter((s) => s !== src));
+    setImgIndex(0);
+  };
+
   useEffect(() => {
+    if (validSrcs.length <= 1) return;
     const t = setInterval(() => {
-      setImgIndex((i) => (i + 1) % cat.images.length);
+      setImgIndex((i) => (i + 1) % validSrcs.length);
     }, 2000);
     return () => clearInterval(t);
-  }, [cat.images.length]);
+  }, [validSrcs.length]);
+
+  const safeIndex = validSrcs.length > 0 ? imgIndex % validSrcs.length : 0;
 
   return (
     <motion.div
@@ -228,19 +237,20 @@ function CategoryTile({ cat, index }) {
         flexShrink: 0,
       }}
     >
-      {/* Crossfading background images */}
-      {cat.images.map((src, i) => (
+      {/* Crossfading background images — failed images auto-removed */}
+      {validSrcs.map((src, i) => (
         <img
           key={src}
           src={src}
           alt=""
+          onError={() => dropImage(src)}
           style={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: i === imgIndex ? 1 : 0,
+            opacity: i === safeIndex ? 1 : 0,
             transition: "opacity 0.9s ease",
           }}
         />
