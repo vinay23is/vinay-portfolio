@@ -1,10 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-import omegaImg from "../assets/omega-snoopy.png";
-import pdmImg from "../assets/pdm-layton.png";
-import bvlgariImg from "../assets/bvlgari-tygar.png";
-
 // ── Data ────────────────────────────────────────────────────────────────────
 
 const LANGUAGES = [
@@ -12,12 +8,6 @@ const LANGUAGES = [
   { name: "Hindi", level: "Fluent" },
   { name: "English", level: "Fluent" },
   { name: "Japanese", level: "Learning", streak: "122日連続 — 122 day streak and counting" },
-];
-
-const SNEAKER_IMAGES = [
-  "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=900&auto=format&fit=crop&q=60",
-  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=60",
-  "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=900&auto=format&fit=crop&q=60",
 ];
 
 const TILES = [
@@ -34,7 +24,7 @@ const TILES = [
     id: "kawasaki",
     emoji: "🏍",
     name: "Kawasaki H2",
-    image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800&q=80",
     desc: "Supercharged. Borderline illegal. Absolutely necessary.",
     rotate: 2,
     size: "small",
@@ -43,7 +33,7 @@ const TILES = [
     id: "omega",
     emoji: "⌚",
     name: "Omega Speedmaster Snoopy Moonswatch",
-    image: omegaImg,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
     desc: "A watch that makes you smile every time you look at it. That's rare.",
     rotate: -1.5,
     size: "medium",
@@ -51,18 +41,17 @@ const TILES = [
   {
     id: "sneakers",
     emoji: "👟",
-    name: "SB Dunks",
-    image: SNEAKER_IMAGES,
+    name: "Sneakers",
+    image: "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=800&q=80",
     desc: "Off-White collab. TS x AJ1. The ones that got away. Still watching.",
     rotate: 3.5,
     size: "large",
-    carousel: true,
   },
   {
     id: "pdm",
     emoji: "🌸",
     name: "Parfums de Marly Layton",
-    image: pdmImg,
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=800&q=80",
     desc: "Still mapping the world of scent. Every bottle is a new vocabulary word.",
     rotate: -2.5,
     size: "medium",
@@ -71,7 +60,7 @@ const TILES = [
     id: "bvlgari",
     emoji: "🌸",
     name: "Bvlgari Le Gemme Tygar",
-    image: bvlgariImg,
+    image: "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=800&q=80",
     desc: "Bulgari went somewhere unexpected. I followed.",
     rotate: 1.5,
     size: "small",
@@ -80,7 +69,7 @@ const TILES = [
     id: "verstappen",
     emoji: "🏎",
     name: "Max Verstappen",
-    image: "https://images.unsplash.com/photo-1504707748692-419802cf939d?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1558618047-3c7e6c2b6eee?w=800&q=80",
     desc: "Four world titles. Doesn't care what you think. That's the only way to operate.",
     rotate: -3.5,
     size: "small",
@@ -89,7 +78,7 @@ const TILES = [
     id: "cinema",
     emoji: "🎬",
     name: "Cinema",
-    image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
     desc: "Telugu. Hindi. English. Japanese. A good film hits differently in its native language.",
     rotate: 2.5,
     size: "medium",
@@ -98,7 +87,7 @@ const TILES = [
     id: "music",
     emoji: "🎵",
     name: "Music",
-    image: "https://images.unsplash.com/photo-1501386761578-eaa54b0e2225?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
     desc: "Songs across four languages. If it moves me, it counts.",
     rotate: -1,
     size: "large",
