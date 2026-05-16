@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
@@ -10,87 +10,104 @@ const LANGUAGES = [
   { name: "Japanese", level: "Learning", streak: "122日連続 — 122 day streak and counting" },
 ];
 
-const TILES = [
+const CATEGORIES = [
   {
-    id: "ducati",
+    id: "bikes",
     emoji: "🏍",
-    name: "Ducati Diavel V4",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    desc: "The most beautiful machine ever made. Cruiser soul, superbike heart.",
+    name: "Bikes",
+    desc: "Two wheels. Full soul.",
     rotate: -3,
     size: "large",
+    images: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+      "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=400&q=80",
+      "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=400&q=80",
+      "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=400&q=80",
+    ],
   },
   {
-    id: "kawasaki",
-    emoji: "🏍",
-    name: "Kawasaki H2",
-    image: "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800&q=80",
-    desc: "Supercharged. Borderline illegal. Absolutely necessary.",
-    rotate: 2,
-    size: "small",
-  },
-  {
-    id: "omega",
+    id: "timepieces",
     emoji: "⌚",
-    name: "Omega Speedmaster Snoopy Moonswatch",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
-    desc: "A watch that makes you smile every time you look at it. That's rare.",
-    rotate: -1.5,
+    name: "Timepieces",
+    desc: "Time is the only luxury.",
+    rotate: 2,
     size: "medium",
+    images: [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
+      "https://images.unsplash.com/photo-1542496658-e33a6d0d4959?w=400&q=80",
+      "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=400&q=80",
+      "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=400&q=80",
+    ],
   },
   {
     id: "sneakers",
     emoji: "👟",
     name: "Sneakers",
-    image: "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=800&q=80",
-    desc: "Off-White collab. TS x AJ1. The ones that got away. Still watching.",
-    rotate: 3.5,
+    desc: "The ones that got away. Still watching.",
+    rotate: -1.5,
     size: "large",
+    images: [
+      "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=400&q=80",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&q=80",
+      "https://images.unsplash.com/photo-1584735175315-9d5df23be4be?w=400&q=80",
+    ],
   },
   {
-    id: "pdm",
+    id: "perfumes",
     emoji: "🌸",
-    name: "Parfums de Marly Layton",
-    image: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=800&q=80",
-    desc: "Still mapping the world of scent. Every bottle is a new vocabulary word.",
-    rotate: -2.5,
+    name: "Perfumes",
+    desc: "Still mapping the world of scent.",
+    rotate: 3.5,
     size: "medium",
+    images: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80",
+      "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=400&q=80",
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&q=80",
+      "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80",
+    ],
   },
   {
-    id: "bvlgari",
-    emoji: "🌸",
-    name: "Bvlgari Le Gemme Tygar",
-    image: "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=800&q=80",
-    desc: "Bulgari went somewhere unexpected. I followed.",
-    rotate: 1.5,
-    size: "small",
-  },
-  {
-    id: "verstappen",
+    id: "f1",
     emoji: "🏎",
-    name: "Max Verstappen",
-    image: "https://images.unsplash.com/photo-1558618047-3c7e6c2b6eee?w=800&q=80",
-    desc: "Four world titles. Doesn't care what you think. That's the only way to operate.",
-    rotate: -3.5,
+    name: "F1",
+    desc: "Four world titles. Doesn't care what you think.",
+    rotate: -2.5,
     size: "small",
+    images: [
+      "https://images.unsplash.com/photo-1558618047-3c7e6c2b6eee?w=400&q=80",
+      "https://images.unsplash.com/photo-1504432842672-1a79f78e4084?w=400&q=80",
+      "https://images.unsplash.com/photo-1581888227599-779811939961?w=400&q=80",
+      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+    ],
   },
   {
-    id: "cinema",
+    id: "movies",
     emoji: "🎬",
-    name: "Cinema",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+    name: "Movies",
     desc: "Telugu. Hindi. English. Japanese. A good film hits differently in its native language.",
-    rotate: 2.5,
+    rotate: 1.5,
     size: "medium",
+    images: [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80",
+      "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
+      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80",
+      "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
+    ],
   },
   {
     id: "music",
     emoji: "🎵",
     name: "Music",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
     desc: "Songs across four languages. If it moves me, it counts.",
-    rotate: -1,
+    rotate: -3.5,
     size: "large",
+    images: [
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80",
+      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&q=80",
+      "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&q=80",
+      "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&q=80",
+    ],
   },
 ];
 
@@ -161,63 +178,36 @@ function SectionLabel({ children }) {
   );
 }
 
-// ── Carousel image component ─────────────────────────────────────────────────
-
-function CarouselImage({ images, paused }) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (paused) return;
-    const t = setInterval(() => {
-      setIndex((i) => (i + 1) % images.length);
-    }, 2500);
-    return () => clearInterval(t);
-  }, [paused, images.length]);
-
-  return (
-    <div style={{ position: "absolute", inset: 0 }}>
-      {images.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt=""
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: i === index ? 1 : 0,
-            transition: "opacity 0.8s ease",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// ── Mood board tile ──────────────────────────────────────────────────────────
+// ── Category tile ────────────────────────────────────────────────────────────
 
 const SIZE_MAP = {
-  small: { minHeight: "200px", flex: "1 1 200px", maxWidth: "280px" },
-  medium: { minHeight: "260px", flex: "1 1 260px", maxWidth: "340px" },
-  large: { minHeight: "300px", flex: "1 1 300px", maxWidth: "420px" },
+  small: { minHeight: "220px", flex: "1 1 220px", maxWidth: "300px" },
+  medium: { minHeight: "280px", flex: "1 1 280px", maxWidth: "360px" },
+  large: { minHeight: "320px", flex: "1 1 320px", maxWidth: "440px" },
 };
 
-function MoodTile({ tile, index }) {
+function CategoryTile({ cat, index }) {
   const [hovered, setHovered] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const sizeStyle = SIZE_MAP[tile.size];
+  const sizeStyle = SIZE_MAP[cat.size];
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setImgIndex((i) => (i + 1) % cat.images.length);
+    }, 2000);
+    return () => clearInterval(t);
+  }, [cat.images.length]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30, rotate: tile.rotate }}
+      initial={{ opacity: 0, y: 30, rotate: cat.rotate }}
       animate={
         inView
-          ? { opacity: 1, y: 0, rotate: hovered ? 0 : tile.rotate }
-          : { opacity: 0, y: 30, rotate: tile.rotate }
+          ? { opacity: 1, y: 0, rotate: hovered ? 0 : cat.rotate }
+          : { opacity: 0, y: 30, rotate: cat.rotate }
       }
       transition={{
         opacity: { duration: 0.5, delay: index * 0.07 },
@@ -231,18 +221,18 @@ function MoodTile({ tile, index }) {
         overflow: "hidden",
         borderRadius: "6px",
         border: hovered ? "1.5px solid #e8ff47" : "1px solid #1f1f1f",
+        backgroundColor: "#111111",
         ...sizeStyle,
         cursor: "default",
         transition: "border-color 0.2s ease",
         flexShrink: 0,
       }}
     >
-      {/* Background image */}
-      {tile.carousel ? (
-        <CarouselImage images={tile.image} paused={hovered} />
-      ) : (
+      {/* Crossfading background images */}
+      {cat.images.map((src, i) => (
         <img
-          src={tile.image}
+          key={src}
+          src={src}
           alt=""
           style={{
             position: "absolute",
@@ -250,9 +240,11 @@ function MoodTile({ tile, index }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            opacity: i === imgIndex ? 1 : 0,
+            transition: "opacity 0.9s ease",
           }}
         />
-      )}
+      ))}
 
       {/* Dark overlay */}
       <div
@@ -261,6 +253,7 @@ function MoodTile({ tile, index }) {
           inset: 0,
           backgroundColor: hovered ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.62)",
           transition: "background-color 0.35s ease",
+          zIndex: 1,
         }}
       />
 
@@ -274,19 +267,20 @@ function MoodTile({ tile, index }) {
           flexDirection: "column",
           justifyContent: "flex-end",
           gap: "0.4rem",
+          zIndex: 2,
         }}
       >
-        <span style={{ fontSize: "1.75rem", lineHeight: 1 }}>{tile.emoji}</span>
+        <span style={{ fontSize: "1.75rem", lineHeight: 1 }}>{cat.emoji}</span>
         <span
           style={{
             fontFamily: "Syne, sans-serif",
-            fontSize: "0.95rem",
+            fontSize: "1.1rem",
             fontWeight: 700,
             color: "#f0f0f0",
             lineHeight: 1.3,
           }}
         >
-          {tile.name}
+          {cat.name}
         </span>
         <motion.span
           animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 6 }}
@@ -298,7 +292,7 @@ function MoodTile({ tile, index }) {
             lineHeight: 1.55,
           }}
         >
-          {tile.desc}
+          {cat.desc}
         </motion.span>
       </div>
     </motion.div>
@@ -500,8 +494,8 @@ export default function Personal() {
             alignItems: "flex-start",
           }}
         >
-          {TILES.map((tile, i) => (
-            <MoodTile key={tile.id} tile={tile} index={i} />
+          {CATEGORIES.map((cat, i) => (
+            <CategoryTile key={cat.id} cat={cat} index={i} />
           ))}
         </div>
       </section>
