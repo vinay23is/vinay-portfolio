@@ -42,19 +42,67 @@ const PROJECTS = [
 
 const EXPERIENCE = [
   {
-    company: "Handshake AI",
-    role: "MOVE AI Research Fellow",
-    period: "2025–Present",
-  },
-  {
-    company: "University of Kansas (NCCS)",
+    id: "ku-nccs",
+    company: "University of Kansas — NCCS",
     role: "Graduate Research Assistant",
-    period: "Jan 2024–Jan 2025",
+    period: "Jan 2024 – Jan 2025",
+    bullets: [
+      "Developed 3D visual simulations for robotic construction systems using OpenGL and C++.",
+      "Built Python data analysis and visualization pipelines.",
+      "Collaborated across engineering and CS teams.",
+    ],
   },
   {
+    id: "ku-grader",
+    company: "University of Kansas",
+    role: "Grader — MATH 126 (Calculus)",
+    period: "Jan 2024 – Jan 2025",
+    bullets: [
+      "Evaluated assignments and exams with accuracy.",
+      "Provided constructive feedback to students.",
+    ],
+  },
+  {
+    id: "ku-fafsa",
+    company: "University of Kansas",
+    role: "FAFSA Advisor",
+    period: "May 2024 – Aug 2024",
+    bullets: [
+      "Guided students and families through FAFSA completion via virtual and in-person sessions.",
+      "Improved completion outcomes through direct outreach.",
+    ],
+  },
+  {
+    id: "ku-it",
+    company: "University of Kansas",
+    role: "IT Student Technician",
+    period: "Aug 2023 – Jan 2024",
+    bullets: [
+      "Resolved IT issues via calls and chat.",
+      "Installed operating systems and reimaged library loaner laptops.",
+    ],
+  },
+  {
+    id: "ltimindtree",
     company: "LTIMindtree",
     role: "Software Engineering Intern",
-    period: "Jan–May 2023",
+    period: "Jan 2023 – May 2023 · Pune, India",
+    bullets: [
+      "Built features using Java, Python, and JavaScript in collaborative agile workflows.",
+    ],
+  },
+];
+
+const EDUCATION = [
+  {
+    school: "University of Kansas",
+    degree: "Master of Science, Computer Science",
+    period: "2023 – 2025 · Lawrence, KS",
+  },
+  {
+    school: "Sree Vidyanikethan Engineering College",
+    degree: "Bachelor of Technology, Computer Science",
+    period: "2019 – 2023 · Tirupati, India",
   },
 ];
 
@@ -255,6 +303,91 @@ function ExperienceEntry({ item, index }) {
       ref={ref}
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "2rem",
+        paddingLeft: "2rem",
+        position: "relative",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          left: "-5px",
+          top: "6px",
+          width: "10px",
+          height: "10px",
+          borderRadius: "50%",
+          border: "2px solid #e8ff47",
+          backgroundColor: "#080808",
+          flexShrink: 0,
+        }}
+      />
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+        <span
+          style={{
+            fontFamily: "Syne, sans-serif",
+            fontSize: "1.05rem",
+            fontWeight: 700,
+            color: "#f0f0f0",
+          }}
+        >
+          {item.company}
+        </span>
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.72rem",
+            color: "#e8ff47",
+          }}
+        >
+          {item.role}
+        </span>
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#555555",
+            marginBottom: "0.4rem",
+          }}
+        >
+          {item.period}
+        </span>
+        <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+          {item.bullets.map((b, bi) => (
+            <li
+              key={bi}
+              style={{
+                fontFamily: "DM Mono, monospace",
+                fontSize: "0.75rem",
+                color: "#888888",
+                lineHeight: 1.6,
+                display: "flex",
+                gap: "0.6rem",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ color: "#e8ff4766", flexShrink: 0, marginTop: "2px" }}>—</span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+}
+
+function EducationEntry({ item, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       style={{
         display: "flex",
@@ -274,27 +407,37 @@ function ExperienceEntry({ item, index }) {
           borderRadius: "50%",
           border: "2px solid #e8ff47",
           backgroundColor: "#080808",
+          flexShrink: 0,
         }}
       />
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
         <span
           style={{
             fontFamily: "Syne, sans-serif",
-            fontSize: "1.1rem",
+            fontSize: "1.05rem",
             fontWeight: 700,
             color: "#f0f0f0",
           }}
         >
-          {item.company}
+          {item.school}
         </span>
         <span
           style={{
             fontFamily: "DM Mono, monospace",
-            fontSize: "0.75rem",
+            fontSize: "0.72rem",
+            color: "#e8ff47",
+          }}
+        >
+          {item.degree}
+        </span>
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
             color: "#555555",
           }}
         >
-          {item.role} · {item.period}
+          {item.period}
         </span>
       </div>
     </motion.div>
@@ -540,7 +683,57 @@ export default function Work() {
             }}
           />
           {EXPERIENCE.map((item, i) => (
-            <ExperienceEntry key={item.company} item={item} index={i} />
+            <ExperienceEntry key={item.id} item={item} index={i} />
+          ))}
+        </div>
+      </section>
+
+      {/* EDUCATION */}
+      <section
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "4rem 2rem 6rem",
+        }}
+      >
+        <SectionLabel>05 — EDUCATION</SectionLabel>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{
+            fontFamily: "Syne, sans-serif",
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 700,
+            color: "#f0f0f0",
+            margin: "0 0 3rem",
+          }}
+        >
+          Education
+        </motion.h2>
+
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2.5rem",
+            paddingLeft: "1rem",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "1px",
+              backgroundColor: "#1f1f1f",
+            }}
+          />
+          {EDUCATION.map((item, i) => (
+            <EducationEntry key={item.school} item={item} index={i} />
           ))}
         </div>
       </section>
@@ -553,7 +746,7 @@ export default function Work() {
           padding: "4rem 2rem 8rem",
         }}
       >
-        <SectionLabel>05 — SKILLS</SectionLabel>
+        <SectionLabel>06 — SKILLS</SectionLabel>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
