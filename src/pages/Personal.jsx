@@ -21,8 +21,8 @@ const CATEGORIES = [
     images: [
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
       "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=400&q=80",
-      "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=400&q=80",
-      "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=400&q=80",
+      "https://images.unsplash.com/photo-1568772585407-9f605780f3f4?w=400&q=80",
+      "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400&q=80",
     ],
   },
   {
@@ -35,8 +35,8 @@ const CATEGORIES = [
     images: [
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
       "https://images.unsplash.com/photo-1542496658-e33a6d0d4959?w=400&q=80",
-      "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=400&q=80",
-      "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=400&q=80",
+      "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=80",
+      "https://images.unsplash.com/photo-1526045431048-f857369baa09?w=400&q=80",
     ],
   },
   {
@@ -63,8 +63,8 @@ const CATEGORIES = [
     images: [
       "https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80",
       "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=400&q=80",
-      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&q=80",
-      "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&q=80",
+      "https://images.unsplash.com/photo-1588776814546-1ffbb8b9e48d?w=400&q=80",
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&q=80",
     ],
   },
   {
@@ -75,10 +75,10 @@ const CATEGORIES = [
     rotate: -2.5,
     size: "small",
     images: [
-      "https://images.unsplash.com/photo-1558618047-3c7e6c2b6eee?w=400&q=80",
-      "https://images.unsplash.com/photo-1504432842672-1a79f78e4084?w=400&q=80",
-      "https://images.unsplash.com/photo-1581888227599-779811939961?w=400&q=80",
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&q=80",
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&q=80",
+      "https://images.unsplash.com/photo-1575364289537-669f78fce15e?w=400&q=80",
+      "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=400&q=80",
     ],
   },
   {
