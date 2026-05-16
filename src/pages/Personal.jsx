@@ -62,9 +62,9 @@ const CATEGORIES = [
     size: "medium",
     images: [
       "https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80",
-      "https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=400&q=80",
-      "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&q=80",
-      "https://images.unsplash.com/photo-1563170351-be9a5a1e27fd?w=400&q=80",
+      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80",
+      "https://images.unsplash.com/photo-1616169727046-3bded3b4e524?w=400&q=80",
+      "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&q=80",
     ],
   },
   {
