@@ -1,67 +1,131 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
+
+import omegaImg from "../assets/omega-snoopy.png";
+import pdmImg from "../assets/pdm-layton.png";
+import bvlgariImg from "../assets/bvlgari-tygar.png";
+
+// ── Data ────────────────────────────────────────────────────────────────────
 
 const LANGUAGES = [
   { name: "Telugu", level: "Native" },
   { name: "Hindi", level: "Fluent" },
   { name: "English", level: "Fluent" },
-  { name: "Japanese", level: "Learning", note: "(頑張ってます)" },
+  { name: "Japanese", level: "Learning", streak: "122日連続 — 122 day streak and counting" },
 ];
 
-const OBSESSIONS = [
+const SNEAKER_IMAGES = [
+  "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=900&auto=format&fit=crop&q=60",
+  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=60",
+  "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=900&auto=format&fit=crop&q=60",
+];
+
+const TILES = [
   {
+    id: "ducati",
     emoji: "🏍",
     name: "Ducati Diavel V4",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     desc: "The most beautiful machine ever made. Cruiser soul, superbike heart.",
+    rotate: -3,
+    size: "large",
   },
   {
+    id: "kawasaki",
     emoji: "🏍",
     name: "Kawasaki H2",
+    image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=800&q=80",
     desc: "Supercharged. Borderline illegal. Absolutely necessary.",
+    rotate: 2,
+    size: "small",
   },
   {
+    id: "omega",
     emoji: "⌚",
     name: "Omega Speedmaster Snoopy Moonswatch",
+    image: omegaImg,
     desc: "A watch that makes you smile every time you look at it. That's rare.",
+    rotate: -1.5,
+    size: "medium",
   },
   {
+    id: "sneakers",
     emoji: "👟",
     name: "SB Dunks",
-    desc: "Can't get them. Still want them. The ones I'd actually get: Yeezy 350, TS x Air Jordan Low, Off-White collabs.",
+    image: SNEAKER_IMAGES,
+    desc: "Off-White collab. TS x AJ1. The ones that got away. Still watching.",
+    rotate: 3.5,
+    size: "large",
+    carousel: true,
   },
   {
+    id: "pdm",
     emoji: "🌸",
-    name: "Perfumery",
+    name: "Parfums de Marly Layton",
+    image: pdmImg,
     desc: "Still mapping the world of scent. Every bottle is a new vocabulary word.",
+    rotate: -2.5,
+    size: "medium",
   },
   {
+    id: "bvlgari",
+    emoji: "🌸",
+    name: "Bvlgari Le Gemme Tygar",
+    image: bvlgariImg,
+    desc: "Bulgari went somewhere unexpected. I followed.",
+    rotate: 1.5,
+    size: "small",
+  },
+  {
+    id: "verstappen",
+    emoji: "🏎",
+    name: "Max Verstappen",
+    image: "https://images.unsplash.com/photo-1504707748692-419802cf939d?w=800&q=80",
+    desc: "Four world titles. Doesn't care what you think. That's the only way to operate.",
+    rotate: -3.5,
+    size: "small",
+  },
+  {
+    id: "cinema",
     emoji: "🎬",
     name: "Cinema",
-    desc: "Movies in Telugu, Hindi, English, Japanese. A good film hits differently in its native language.",
+    image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
+    desc: "Telugu. Hindi. English. Japanese. A good film hits differently in its native language.",
+    rotate: 2.5,
+    size: "medium",
   },
   {
+    id: "music",
     emoji: "🎵",
     name: "Music",
-    desc: "Songs across all four languages. If it moves me, it counts.",
+    image: "https://images.unsplash.com/photo-1501386761578-eaa54b0e2225?w=800&q=80",
+    desc: "Songs across four languages. If it moves me, it counts.",
+    rotate: -1,
+    size: "large",
   },
+];
+
+const STATS = [
+  { num: "4", label: "Languages spoken or learning" },
+  { num: "122", label: "Duolingo streak days (Japanese)" },
+  { num: "0", label: "Dunks owned (yet)" },
+  { num: "3+", label: "Live AI apps deployed" },
 ];
 
 const DAILY = [
   { time: "7:00 AM", activity: "Wake up, resist phone" },
   { time: "8:00 AM", activity: "Study / Build" },
-  { time: "12:00 PM", activity: "Gym (3-4x a week)" },
-  { time: "2:00 PM", activity: "Deep work / Projects" },
-  { time: "7:00 PM", activity: "Movies / Music / Japanese" },
-  { time: "10:00 PM", activity: "Overthink everything" },
+  { time: "12:00 PM", activity: "Cook (yes, from scratch)" },
+  { time: "1:00 PM", activity: "Deep work / Projects" },
+  { time: "5:30 PM", activity: "Duolingo — 122 day streak 🇯🇵" },
+  { time: "6:00 PM", activity: "Gym / Walk" },
+  { time: "8:00 PM", activity: "Dinner + decompress" },
+  { time: "9:00 PM", activity: "Anime / Series / Movies" },
+  { time: "10:30 PM", activity: "Overthink everything" },
   { time: "11:30 PM", activity: "Actually sleep" },
 ];
 
-const STATS = [
-  { num: "4", label: "Languages spoken/learning" },
-  { num: "3+", label: "Live AI apps deployed" },
-  { num: "∞", label: "Films watched across languages" },
-  { num: "0", label: "Dunks owned (yet)" },
-];
+// ── Helpers ──────────────────────────────────────────────────────────────────
 
 function CountUp({ target, inView }) {
   const [count, setCount] = useState(0);
@@ -70,8 +134,8 @@ function CountUp({ target, inView }) {
   useEffect(() => {
     if (!inView || isSpecial) return;
     const end = parseInt(target);
-    const duration = 1500;
-    const steps = 40;
+    const duration = 1600;
+    const steps = 50;
     const increment = end / steps;
     let current = 0;
     const timer = setInterval(() => {
@@ -107,6 +171,152 @@ function SectionLabel({ children }) {
     </span>
   );
 }
+
+// ── Carousel image component ─────────────────────────────────────────────────
+
+function CarouselImage({ images, paused }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, 2500);
+    return () => clearInterval(t);
+  }, [paused, images.length]);
+
+  return (
+    <div style={{ position: "absolute", inset: 0 }}>
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: i === index ? 1 : 0,
+            transition: "opacity 0.8s ease",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ── Mood board tile ──────────────────────────────────────────────────────────
+
+const SIZE_MAP = {
+  small: { minHeight: "200px", flex: "1 1 200px", maxWidth: "280px" },
+  medium: { minHeight: "260px", flex: "1 1 260px", maxWidth: "340px" },
+  large: { minHeight: "300px", flex: "1 1 300px", maxWidth: "420px" },
+};
+
+function MoodTile({ tile, index }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const sizeStyle = SIZE_MAP[tile.size];
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30, rotate: tile.rotate }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, rotate: hovered ? 0 : tile.rotate }
+          : { opacity: 0, y: 30, rotate: tile.rotate }
+      }
+      transition={{
+        opacity: { duration: 0.5, delay: index * 0.07 },
+        y: { duration: 0.6, delay: index * 0.07, ease: [0.33, 1, 0.68, 1] },
+        rotate: { type: "spring", stiffness: 260, damping: 22 },
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        borderRadius: "6px",
+        border: hovered ? "1.5px solid #e8ff47" : "1px solid #1f1f1f",
+        ...sizeStyle,
+        cursor: "default",
+        transition: "border-color 0.2s ease",
+        flexShrink: 0,
+      }}
+    >
+      {/* Background image */}
+      {tile.carousel ? (
+        <CarouselImage images={tile.image} paused={hovered} />
+      ) : (
+        <img
+          src={tile.image}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
+      )}
+
+      {/* Dark overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: hovered ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.62)",
+          transition: "background-color 0.35s ease",
+        }}
+      />
+
+      {/* Content */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          padding: "1.25rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          gap: "0.4rem",
+        }}
+      >
+        <span style={{ fontSize: "1.75rem", lineHeight: 1 }}>{tile.emoji}</span>
+        <span
+          style={{
+            fontFamily: "Syne, sans-serif",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            color: "#f0f0f0",
+            lineHeight: 1.3,
+          }}
+        >
+          {tile.name}
+        </span>
+        <motion.span
+          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 6 }}
+          transition={{ duration: 0.25 }}
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#cccccc",
+            lineHeight: 1.55,
+          }}
+        >
+          {tile.desc}
+        </motion.span>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Personal() {
   const statsRef = useRef(null);
@@ -250,15 +460,16 @@ export default function Personal() {
               >
                 {lang.level}
               </span>
-              {lang.note && (
+              {lang.streak && (
                 <span
                   style={{
                     fontFamily: "DM Mono, monospace",
-                    fontSize: "0.7rem",
+                    fontSize: "0.68rem",
                     color: "#555555",
+                    lineHeight: 1.5,
                   }}
                 >
-                  {lang.note}
+                  {lang.streak}
                 </span>
               )}
             </motion.div>
@@ -294,58 +505,14 @@ export default function Personal() {
 
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: "1rem",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1.25rem",
+            alignItems: "flex-start",
           }}
         >
-          {OBSESSIONS.map((item, i) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(232, 255, 71, 0.08)" }}
-              style={{
-                padding: "1.5rem",
-                border: "1px solid #1f1f1f",
-                borderRadius: "4px",
-                backgroundColor: "#111111",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.75rem",
-                transition: "border-color 0.2s, box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#e8ff4740")}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "#1f1f1f";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              <span style={{ fontSize: "2rem" }}>{item.emoji}</span>
-              <span
-                style={{
-                  fontFamily: "Syne, sans-serif",
-                  fontSize: "0.95rem",
-                  fontWeight: 700,
-                  color: "#f0f0f0",
-                  lineHeight: 1.3,
-                }}
-              >
-                {item.name}
-              </span>
-              <span
-                style={{
-                  fontFamily: "DM Mono, monospace",
-                  fontSize: "0.72rem",
-                  color: "#555555",
-                  lineHeight: 1.6,
-                }}
-              >
-                {item.desc}
-              </span>
-            </motion.div>
+          {TILES.map((tile, i) => (
+            <MoodTile key={tile.id} tile={tile} index={i} />
           ))}
         </div>
       </section>
@@ -369,7 +536,7 @@ export default function Personal() {
         >
           {[
             { label: "Watching", value: "Whatever's on — across all four languages" },
-            { label: "Learning", value: "Japanese (日本語)" },
+            { label: "Learning", value: "Japanese (日本語) — 122 day streak" },
             { label: "Listening", value: "Music across Telugu, Hindi, English, Japanese" },
           ].map((item, i) => (
             <motion.div
@@ -449,7 +616,7 @@ export default function Personal() {
                   fontFamily: "DM Mono, monospace",
                   fontSize: "0.7rem",
                   color: "#555555",
-                  letterSpacing: "0.08em",
+                  letterSpacing: "0.06em",
                 }}
               >
                 {stat.label}
@@ -485,26 +652,19 @@ export default function Personal() {
           A day in the life.
         </motion.h2>
 
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            gap: "0",
-          }}
-        >
+        <div style={{ display: "flex", flexDirection: "column" }}>
           {DAILY.map((entry, i) => (
             <motion.div
               key={entry.time}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
               style={{
                 display: "grid",
                 gridTemplateColumns: "100px 1fr",
                 gap: "2rem",
-                padding: "1rem 0",
+                padding: "0.9rem 0",
                 borderBottom: i < DAILY.length - 1 ? "1px solid #1f1f1f" : "none",
                 alignItems: "center",
               }}
