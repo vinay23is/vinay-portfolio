@@ -68,10 +68,10 @@ const CATEGORIES = [
     ],
   },
   {
-    id: "f1",
+    id: "supercars",
     emoji: "🏎",
-    name: "F1",
-    desc: "Four world titles. Doesn't care what you think.",
+    name: "Supercars",
+    desc: "The ones you hear before you see them.",
     rotate: -2.5,
     size: "small",
     images: [
