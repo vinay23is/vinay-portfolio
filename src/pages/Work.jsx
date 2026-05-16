@@ -519,11 +519,11 @@ export default function Work() {
             position: "relative",
             zIndex: 1,
             fontFamily: "DM Mono, monospace",
-            fontSize: "0.7rem",
-            color: "#e8ff47",
+            fontSize: "11px",
+            color: "#555555",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            border: "1px solid #e8ff4733",
+            border: "1px solid #2a2a2a",
             borderRadius: "2px",
             padding: "6px 16px",
             marginBottom: "3rem",
@@ -537,11 +537,11 @@ export default function Work() {
           <div
             style={{
               fontFamily: "Syne, sans-serif",
-              fontSize: "clamp(5rem, 16vw, 14rem)",
+              fontSize: "clamp(18vw, 22vw, 280px)",
               fontWeight: 800,
-              lineHeight: 0.9,
+              lineHeight: 0.85,
               color: "#f0f0f0",
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.03em",
               overflow: "hidden",
             }}
           >
@@ -593,7 +593,7 @@ export default function Work() {
             position: "relative",
             zIndex: 1,
             fontFamily: "DM Mono, monospace",
-            fontSize: "0.8rem",
+            fontSize: "13px",
             color: "#555555",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
@@ -609,7 +609,7 @@ export default function Work() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          style={{ position: "relative", zIndex: 1, display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
+          style={{ position: "relative", zIndex: 1, display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", marginTop: "1.5rem" }}
         >
           <MagneticButton href="#work-section" filled>
             View Work
