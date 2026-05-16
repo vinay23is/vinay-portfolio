@@ -537,15 +537,14 @@ export default function Work() {
           <div
             style={{
               fontFamily: "Syne, sans-serif",
-              fontSize: "clamp(18vw, 22vw, 280px)",
+              fontSize: "clamp(12vw, 16vw, 220px)",
               fontWeight: 800,
               lineHeight: 0.85,
               color: "#f0f0f0",
               letterSpacing: "-0.03em",
-              overflow: "hidden",
             }}
           >
-            <div style={{ overflow: "hidden" }}>
+            <div style={{ overflow: "hidden", whiteSpace: "nowrap", display: "block", width: "100%" }}>
               {HERO_LINE1.map((letter, i) => (
                 <motion.span
                   key={i}
@@ -562,7 +561,7 @@ export default function Work() {
                 </motion.span>
               ))}
             </div>
-            <div style={{ overflow: "hidden" }}>
+            <div style={{ overflow: "hidden", whiteSpace: "nowrap", display: "block", width: "100%" }}>
               {HERO_LINE2.map((letter, i) => (
                 <motion.span
                   key={i}
