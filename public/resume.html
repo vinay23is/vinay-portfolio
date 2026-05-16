@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinay Dodla — Resume</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 10.5pt;
+      color: #111;
+      background: #fff;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 56px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .header { text-align: center; margin-bottom: 18px; }
+    .header h1 {
+      font-family: "Arial", sans-serif;
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 6px;
+    }
+    .contact-line {
+      font-family: "Arial", sans-serif;
+      font-size: 9pt;
+      color: #333;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 14px;
+    }
+    .contact-line a { color: #111; text-decoration: none; }
+    .contact-line span { color: #999; }
+
+    /* ── Divider ── */
+    hr { border: none; border-top: 1.5px solid #000; margin: 14px 0; }
+    hr.thin { border-top-width: 0.75px; margin: 8px 0; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 16px; }
+    .section-title {
+      font-family: "Arial", sans-serif;
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    /* ── Entry ── */
+    .entry { margin-bottom: 12px; }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 1px;
+    }
+    .entry-org {
+      font-family: "Arial", sans-serif;
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #000;
+    }
+    .entry-date {
+      font-family: "Arial", sans-serif;
+      font-size: 9.5pt;
+      color: #444;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .entry-role {
+      font-family: "Arial", sans-serif;
+      font-size: 10pt;
+      font-style: italic;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .entry-location {
+      font-family: "Arial", sans-serif;
+      font-size: 9pt;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    ul.bullets {
+      padding-left: 16px;
+      margin-top: 3px;
+    }
+    ul.bullets li {
+      font-size: 10pt;
+      color: #222;
+      margin-bottom: 2px;
+      line-height: 1.5;
+    }
+
+    /* ── Skills ── */
+    .skills-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 5px;
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+    .skills-label {
+      font-family: "Arial", sans-serif;
+      font-weight: 700;
+      min-width: 110px;
+      color: #000;
+    }
+    .skills-value { color: #222; }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 32px 40px; }
+      @page { margin: 0.5in 0.6in; size: letter; }
+      a { color: #111 !important; text-decoration: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Vinay Dodla</h1>
+    <div class="contact-line">
+      <a href="mailto:dodlavinay012@gmail.com">dodlavinay012@gmail.com</a>
+      <span>|</span>
+      <a href="https://linkedin.com/in/vinay-dodla-695232213">linkedin.com/in/vinay-dodla-695232213</a>
+      <span>|</span>
+      <a href="https://github.com/vinay23is">github.com/vinay23is</a>
+      <span>|</span>
+      <span>Lawrence, KS</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">University of Kansas</span>
+        <span class="entry-date">2023 – 2025</span>
+      </div>
+      <div class="entry-role">Master of Science, Computer Science</div>
+      <div class="entry-location">Lawrence, KS</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">Sree Vidyanikethan Engineering College</span>
+        <span class="entry-date">2019 – 2023</span>
+      </div>
+      <div class="entry-role">Bachelor of Technology, Computer Science</div>
+      <div class="entry-location">Tirupati, India</div>
+    </div>
+  </div>
+
+  <hr class="thin" />
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">University of Kansas — NCCS</span>
+        <span class="entry-date">Jan 2024 – Jan 2025</span>
+      </div>
+      <div class="entry-role">Graduate Research Assistant</div>
+      <ul class="bullets">
+        <li>Developed 3D visual simulations for robotic construction systems using OpenGL and C++.</li>
+        <li>Built Python data analysis and visualization pipelines for research datasets.</li>
+        <li>Collaborated across engineering and computer science teams on interdisciplinary projects.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">University of Kansas</span>
+        <span class="entry-date">Jan 2024 – Jan 2025</span>
+      </div>
+      <div class="entry-role">Grader — MATH 126 (Calculus)</div>
+      <ul class="bullets">
+        <li>Evaluated student assignments and exams with accuracy and consistency.</li>
+        <li>Provided constructive written feedback to support student learning outcomes.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">University of Kansas</span>
+        <span class="entry-date">May 2024 – Aug 2024</span>
+      </div>
+      <div class="entry-role">FAFSA Advisor</div>
+      <ul class="bullets">
+        <li>Guided students and families through FAFSA completion via virtual and in-person sessions.</li>
+        <li>Improved FAFSA completion outcomes through direct, personalized outreach.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">University of Kansas</span>
+        <span class="entry-date">Aug 2023 – Jan 2024</span>
+      </div>
+      <div class="entry-role">IT Student Technician</div>
+      <ul class="bullets">
+        <li>Resolved hardware and software IT issues via phone and chat support.</li>
+        <li>Installed operating systems and reimaged library loaner laptops for student use.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">LTIMindtree</span>
+        <span class="entry-date">Jan 2023 – May 2023</span>
+      </div>
+      <div class="entry-role">Software Engineering Intern · Pune, India</div>
+      <ul class="bullets">
+        <li>Built client-facing features using Java, Python, and JavaScript in collaborative agile workflows.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="thin" />
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">StockSense AI</span>
+        <span class="entry-date"><a href="https://stocksense-ai-ten.vercel.app">Live</a> · <a href="https://github.com/vinay23is/stocksense-ai">GitHub</a></span>
+      </div>
+      <div class="entry-role">React · FastAPI · Gemini AI · Recharts</div>
+      <ul class="bullets">
+        <li>Built a full-stack AI stock dashboard with real-time market data, technical indicators, and AI-generated insights.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">Financial Docs RAG</span>
+        <span class="entry-date"><a href="https://financial-docs-rag-bky4wws43jxf6xxvty4yhn.streamlit.app">Live</a> · <a href="https://github.com/vinay23is/financial-docs-rag">GitHub</a></span>
+      </div>
+      <div class="entry-role">LangChain · ChromaDB · Gemini · Streamlit</div>
+      <ul class="bullets">
+        <li>Developed a RAG chatbot for SEC 10-K filings enabling natural-language queries over Apple, Alphabet, and Tesla filings.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">HireIQ Resume Screener</span>
+        <span class="entry-date"><a href="https://smart-resume-screener-amn8x57pgp2fzg4phappiuo.streamlit.app">Live</a> · <a href="https://github.com/vinay23is/smart-resume-screener">GitHub</a></span>
+      </div>
+      <div class="entry-role">Multi-Agent AI · Gemini Flash · Streamlit</div>
+      <ul class="bullets">
+        <li>Designed a multi-agent AI system that scores resumes against job descriptions with keyword gap analysis.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-org">Anchor</span>
+        <span class="entry-date"><a href="https://anchor-app-git-main-vinay-dodlas-projects.vercel.app/login">Live</a> · <a href="https://github.com/vinay23is/anchor-app">GitHub</a></span>
+      </div>
+      <div class="entry-role">React · Firebase · Gemini AI · Vercel</div>
+      <ul class="bullets">
+        <li>Built an AI-powered peer support platform connecting users with humans or AI for emotional support.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="thin" />
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Skills</div>
+
+    <div class="skills-row">
+      <span class="skills-label">AI / ML</span>
+      <span class="skills-value">LangChain, RAG, Multi-Agent AI, Gemini, TensorFlow Lite, Scikit-learn</span>
+    </div>
+    <div class="skills-row">
+      <span class="skills-label">Languages</span>
+      <span class="skills-value">Python, JavaScript, TypeScript, Java, C++</span>
+    </div>
+    <div class="skills-row">
+      <span class="skills-label">Frontend</span>
+      <span class="skills-value">React, Vite, Tailwind CSS, Recharts, HTML/CSS</span>
+    </div>
+    <div class="skills-row">
+      <span class="skills-label">Backend</span>
+      <span class="skills-value">FastAPI, Firebase, Firestore, REST APIs</span>
+    </div>
+    <div class="skills-row">
+      <span class="skills-label">Cloud / IoT</span>
+      <span class="skills-value">AWS IoT Core, MQTT, ESP32, Vercel, Render</span>
+    </div>
+    <div class="skills-row">
+      <span class="skills-label">Tools</span>
+      <span class="skills-value">Git, Docker, Streamlit, OpenGL</span>
+    </div>
+  </div>
+
+</body>
+</html>

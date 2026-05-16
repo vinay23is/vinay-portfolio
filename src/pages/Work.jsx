@@ -115,7 +115,7 @@ const SKILLS = [
   { category: "Tools", items: ["Git", "Docker", "Streamlit", "OpenGL"] },
 ];
 
-function MagneticButton({ children, href, filled }) {
+function MagneticButton({ children, href, filled, target }) {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -139,8 +139,8 @@ function MagneticButton({ children, href, filled }) {
     <motion.a
       ref={ref}
       href={href}
-      target={href ? "_blank" : undefined}
-      rel={href ? "noopener noreferrer" : undefined}
+      target={target || (href?.startsWith("http") ? "_blank" : undefined)}
+      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
       style={{
         x: springX,
         y: springY,
@@ -586,7 +586,7 @@ export default function Work() {
           >
             View Work
           </MagneticButton>
-          <MagneticButton href="/Vinay_Dodla_Resume.pdf">
+          <MagneticButton href="/resume.html" target="_blank">
             Download Resume
           </MagneticButton>
         </motion.div>
