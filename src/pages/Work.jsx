@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import Marquee from "../components/Marquee";
+import ParticleBackground from "../components/ParticleBackground";
 
 const HERO_LINE1 = "VINAY".split("");
 const HERO_LINE2 = "DODLA".split("");
@@ -465,6 +466,31 @@ function SectionLabel({ children }) {
 export default function Work() {
   const heroRef = useRef(null);
 
+  // Mouse parallax — disabled on touch devices
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const nameX = useSpring(rawX, { stiffness: 50, damping: 20 });
+  const nameY = useSpring(rawY, { stiffness: 50, damping: 20 });
+
+  const tagRawX = useMotionValue(0);
+  const tagRawY = useMotionValue(0);
+  const tagX = useSpring(tagRawX, { stiffness: 50, damping: 20 });
+  const tagY = useSpring(tagRawY, { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) return;
+    const onMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      rawX.set(x);
+      rawY.set(y);
+      tagRawX.set(x * 0.5);
+      tagRawY.set(y * 0.5);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
+  }, []);
+
   return (
     <div>
       {/* HERO */}
@@ -481,12 +507,17 @@ export default function Work() {
           overflow: "hidden",
         }}
       >
+        {/* Particle field — behind everything */}
+        <ParticleBackground />
+
         {/* Available tag */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{
+            position: "relative",
+            zIndex: 1,
             fontFamily: "DM Mono, monospace",
             fontSize: "0.7rem",
             color: "#e8ff47",
@@ -501,8 +532,8 @@ export default function Work() {
           [ Available for work · Open to relocation ]
         </motion.div>
 
-        {/* Giant name */}
-        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        {/* Giant name — parallax layer 1 */}
+        <motion.div style={{ x: nameX, y: nameY, position: "relative", zIndex: 1, textAlign: "center", marginBottom: "1.5rem" }}>
           <div
             style={{
               fontFamily: "Syne, sans-serif",
@@ -549,14 +580,18 @@ export default function Work() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Subtitle */}
+        {/* Subtitle — parallax layer 2 (half speed) */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
           style={{
+            x: tagX,
+            y: tagY,
+            position: "relative",
+            zIndex: 1,
             fontFamily: "DM Mono, monospace",
             fontSize: "0.8rem",
             color: "#555555",
@@ -569,12 +604,12 @@ export default function Work() {
           MS Computer Science &nbsp;·&nbsp; AI Engineer &nbsp;·&nbsp; Builder
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons — no parallax */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
+          style={{ position: "relative", zIndex: 1, display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
         >
           <MagneticButton href="#work-section" filled>
             View Work
@@ -591,6 +626,7 @@ export default function Work() {
             bottom: 0,
             left: 0,
             right: 0,
+            zIndex: 1,
           }}
         >
           <Marquee />
