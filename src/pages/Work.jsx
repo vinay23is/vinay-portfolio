@@ -576,14 +576,7 @@ export default function Work() {
           transition={{ duration: 0.6, delay: 1.4 }}
           style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
         >
-          <MagneticButton
-            href="#work"
-            filled
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById("work-section")?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
+          <MagneticButton href="#work-section" filled>
             View Work
           </MagneticButton>
           <MagneticButton href="/resume.html" target="_blank">
