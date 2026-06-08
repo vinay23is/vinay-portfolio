@@ -1,16 +1,34 @@
-# React + Vite
+# Vinay Dodla — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio for backend, data engineering, and ML engineering roles.
 
-Currently, two official plugins are available:
+## Focus
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The site highlights production-style engineering work:
 
-## React Compiler
+- backend APIs and distributed systems
+- streaming and feature-store pipelines
+- dbt analytics engineering and data quality
+- applied ML systems with reproducible training and inference
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Featured Projects
 
-## Expanding the ESLint configuration
+| Project | Role signal | Stack |
+|---|---|---|
+| PulseOps | Backend SWE, infra, observability | Java, Spring Boot, React, Redis, PostgreSQL, Docker |
+| Fraud Detection Pipeline | ML engineering, streaming, data systems | Python, Kafka, Redis, XGBoost, FastAPI, PostgreSQL |
+| Distributed Chat | Distributed systems, WebSocket scaling | Java, Spring Boot, STOMP, Redis Pub/Sub, Kafka |
+| Fintech Risk Analytics | Data engineering, dbt, BI | dbt, DuckDB/Snowflake, SQL, Power BI |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```

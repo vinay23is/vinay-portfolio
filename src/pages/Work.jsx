@@ -9,35 +9,35 @@ const HERO_LINE2 = "DODLA".split("");
 const PROJECTS = [
   {
     num: "01",
-    name: "StockSense AI",
-    tags: ["React", "FastAPI", "Gemini AI", "Recharts"],
-    desc: "Full-stack AI stock dashboard with real-time market data, technical indicators, and AI-generated insights.",
-    live: "https://stocksense-ai-ten.vercel.app",
-    github: "https://github.com/vinay23is/stocksense-ai",
+    name: "PulseOps",
+    tags: ["Java", "Spring Boot", "Redis", "PostgreSQL", "React"],
+    desc: "API monitoring and incident alerting platform with JWT auth, Redis-backed workers, status pages, observability, and Docker deployment.",
+    live: "https://pulseops-frontend.onrender.com",
+    github: "https://github.com/vinay23is/pulseops-api-monitoring-paas",
   },
   {
     num: "02",
-    name: "Financial Docs RAG",
-    tags: ["LangChain", "ChromaDB", "Gemini", "Streamlit"],
-    desc: "RAG chatbot for SEC 10-K filings. Ask Apple, Alphabet, or Tesla anything.",
-    live: "https://financial-docs-rag-bky4wws43jxf6xxvty4yhn.streamlit.app",
-    github: "https://github.com/vinay23is/financial-docs-rag",
+    name: "Fraud Detection Pipeline",
+    tags: ["Python", "Kafka", "Redis", "XGBoost", "FastAPI"],
+    desc: "Real-time transaction scoring system with online velocity features, model artifact versioning, API inference, and dashboard metrics.",
+    live: "https://fraud-detection-pipeline-pdv9.onrender.com/docs",
+    github: "https://github.com/vinay23is/fraud-detection-pipeline",
   },
   {
     num: "03",
-    name: "HireIQ Resume Screener",
-    tags: ["Multi-Agent AI", "Gemini Flash", "Streamlit"],
-    desc: "Multi-agent AI that scores resumes against job descriptions with keyword gap analysis.",
-    live: "https://smart-resume-screener-amn8x57pgp2fzg4phappiuo.streamlit.app",
-    github: "https://github.com/vinay23is/smart-resume-screener",
+    name: "Distributed Chat",
+    tags: ["Java", "WebSocket", "Redis Pub/Sub", "Kafka", "PostgreSQL"],
+    desc: "Horizontally scaled chat platform where Redis Pub/Sub relays WebSocket events across backend instances and Kafka handles durable notifications.",
+    live: "https://github.com/vinay23is/distributed-chat-system",
+    github: "https://github.com/vinay23is/distributed-chat-system",
   },
   {
     num: "04",
-    name: "Anchor",
-    tags: ["React", "Firebase", "Gemini AI", "Vercel"],
-    desc: "AI-powered peer support platform connecting users with humans or AI for emotional support.",
-    live: "https://anchor-app-git-main-vinay-dodlas-projects.vercel.app/login",
-    github: "https://github.com/vinay23is/anchor-app",
+    name: "Fintech Risk Analytics",
+    tags: ["dbt", "DuckDB", "Snowflake", "SQL", "Power BI"],
+    desc: "Analytics engineering project with staging/intermediate/mart layers, data quality tests, risk metrics, and dashboard-ready marts.",
+    live: "https://github.com/vinay23is/fintech-risk-analytics-platform",
+    github: "https://github.com/vinay23is/fintech-risk-analytics-platform",
   },
 ];
 
@@ -108,12 +108,12 @@ const EDUCATION = [
 ];
 
 const SKILLS = [
-  { category: "AI / ML", items: ["LangChain", "RAG", "Multi-Agent AI", "Gemini", "TensorFlow Lite", "Scikit-learn"] },
-  { category: "Languages", items: ["Python", "JavaScript", "TypeScript", "Java", "C++"] },
-  { category: "Frontend", items: ["React", "Vite", "Tailwind", "Recharts", "HTML/CSS"] },
-  { category: "Backend", items: ["FastAPI", "Firebase", "Firestore", "REST APIs"] },
-  { category: "Cloud / IoT", items: ["AWS IoT Core", "MQTT", "ESP32", "Vercel", "Render"] },
-  { category: "Tools", items: ["Git", "Docker", "Streamlit", "OpenGL"] },
+  { category: "Backend", items: ["Java", "Spring Boot", "FastAPI", "REST APIs", "JWT", "WebSocket"] },
+  { category: "Data", items: ["PostgreSQL", "Redis", "Kafka", "dbt", "DuckDB", "Snowflake", "SQL"] },
+  { category: "ML", items: ["XGBoost", "Scikit-learn", "PyTorch", "TensorFlow Lite", "Feature engineering"] },
+  { category: "Frontend", items: ["React", "TypeScript", "Vite", "Tailwind", "Streamlit"] },
+  { category: "Infra", items: ["Docker", "Docker Compose", "GitHub Actions", "Prometheus", "Grafana"] },
+  { category: "Languages", items: ["Python", "Java", "TypeScript", "JavaScript", "C++"] },
 ];
 
 function MagneticButton({ children, href, filled, target }) {
@@ -600,7 +600,7 @@ export default function Work() {
             marginBottom: "3rem",
           }}
         >
-          MS Computer Science &nbsp;·&nbsp; AI Engineer &nbsp;·&nbsp; Builder
+          MS Computer Science &nbsp;·&nbsp; Software Engineer &nbsp;·&nbsp; Builder
         </motion.p>
 
         {/* CTA Buttons — no parallax */}
