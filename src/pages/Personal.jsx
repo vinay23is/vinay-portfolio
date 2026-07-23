@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 // Personal photos — lead each category with real shots, Unsplash as filler
 import ducati from "../assets/ducati.jpg";
@@ -145,10 +145,16 @@ const DAILY = [
 
 function CountUp({ target, inView }) {
   const [count, setCount] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
   const isSpecial = isNaN(parseInt(target));
 
   useEffect(() => {
     if (!inView || isSpecial) return;
+    // Show the final number instantly instead of animating it.
+    if (prefersReducedMotion) {
+      setCount(parseInt(target));
+      return;
+    }
     const end = parseInt(target);
     const duration = 1600;
     const steps = 50;
@@ -164,7 +170,7 @@ function CountUp({ target, inView }) {
       }
     }, duration / steps);
     return () => clearInterval(timer);
-  }, [inView, target, isSpecial]);
+  }, [inView, target, isSpecial, prefersReducedMotion]);
 
   if (isSpecial) return <>{target}</>;
   return <>{target.includes("+") ? `${count}+` : count}</>;
@@ -197,6 +203,7 @@ const SIZE_MAP = {
 };
 
 function CategoryTile({ cat, index }) {
+  const prefersReducedMotion = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
   const [validSrcs, setValidSrcs] = useState(cat.images);
@@ -210,12 +217,13 @@ function CategoryTile({ cat, index }) {
   };
 
   useEffect(() => {
-    if (validSrcs.length <= 1) return;
+    // Don't auto-cycle images when reduced motion is requested.
+    if (prefersReducedMotion || validSrcs.length <= 1) return;
     const t = setInterval(() => {
       setImgIndex((i) => (i + 1) % validSrcs.length);
     }, 2000);
     return () => clearInterval(t);
-  }, [validSrcs.length]);
+  }, [validSrcs.length, prefersReducedMotion]);
 
   const safeIndex = validSrcs.length > 0 ? imgIndex % validSrcs.length : 0;
 

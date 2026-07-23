@@ -1,5 +1,5 @@
 import { useLocation, Routes, Route, Navigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Cursor from "./components/Cursor";
 import Work from "./pages/Work";
@@ -35,7 +35,9 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <>
+    // reducedMotion="user" makes every framer-motion transform/layout
+    // animation respect the visitor's prefers-reduced-motion setting.
+    <MotionConfig reducedMotion="user">
       <Cursor />
       <Navbar />
       <AnimatePresence mode="wait">
@@ -67,6 +69,6 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-    </>
+    </MotionConfig>
   );
 }

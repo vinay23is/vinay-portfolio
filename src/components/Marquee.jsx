@@ -1,11 +1,14 @@
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const ITEMS =
   "REACT · FASTAPI · PYTHON · LANGCHAIN · RAG · GEMINI AI · FIREBASE · TAILWIND · ESP32 · AWS IOT · OPENGL · C++ · MACHINE LEARNING · ";
 
 export default function Marquee() {
+  const prefersReducedMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
+  // Stop the scroll entirely on hover or when reduced motion is requested.
+  const still = paused || prefersReducedMotion;
 
   return (
     <div
@@ -26,9 +29,9 @@ export default function Marquee() {
           gap: 0,
           whiteSpace: "nowrap",
         }}
-        animate={paused ? { x: 0 } : { x: [0, "-50%"] }}
+        animate={still ? { x: 0 } : { x: [0, "-50%"] }}
         transition={
-          paused
+          still
             ? { duration: 0 }
             : {
                 x: {

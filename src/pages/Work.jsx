@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
+import { motion, useInView, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import Marquee from "../components/Marquee";
-import ParticleBackground from "../components/ParticleBackground";
+
+// Three.js is heavy — code-split it so it never blocks first paint.
+const ParticleBackground = lazy(() => import("../components/ParticleBackground"));
 
 const HERO_LINE1 = "VINAY".split("");
 const HERO_LINE2 = "DODLA".split("");
@@ -494,6 +496,7 @@ function SectionLabel({ children }) {
 
 export default function Work() {
   const heroRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
   // Mouse parallax — disabled on touch devices
   const rawX = useMotionValue(0);
@@ -507,7 +510,8 @@ export default function Work() {
   const tagY = useSpring(tagRawY, { stiffness: 50, damping: 20 });
 
   useEffect(() => {
-    if (window.matchMedia("(hover: none)").matches) return;
+    // Skip parallax on touch devices and when reduced motion is requested.
+    if (prefersReducedMotion || window.matchMedia("(hover: none)").matches) return;
     const onMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -518,7 +522,7 @@ export default function Work() {
     };
     window.addEventListener("mousemove", onMouseMove);
     return () => window.removeEventListener("mousemove", onMouseMove);
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div>
@@ -536,8 +540,13 @@ export default function Work() {
           overflow: "hidden",
         }}
       >
-        {/* Particle field — behind everything */}
-        <ParticleBackground />
+        {/* Particle field — behind everything. Lazy-loaded, and skipped
+            entirely when the visitor prefers reduced motion. */}
+        {!prefersReducedMotion && (
+          <Suspense fallback={null}>
+            <ParticleBackground />
+          </Suspense>
+        )}
 
         {/* Available tag */}
         <motion.div
