@@ -125,7 +125,7 @@ const STATS = [
   { num: "4", label: "Languages spoken or learning" },
   { num: "190", label: "Duolingo streak days (Japanese)" },
   { num: "0", label: "Dunks owned (yet)" },
-  { num: "3+", label: "Live AI apps deployed" },
+  { num: "4+", label: "Live AI apps deployed" },
 ];
 
 const DAILY = [
