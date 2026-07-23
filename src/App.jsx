@@ -1,4 +1,4 @@
-import { useLocation, Routes, Route } from "react-router-dom";
+import { useLocation, Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Cursor from "./components/Cursor";
@@ -64,6 +64,7 @@ export default function App() {
               </PageWrapper>
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
     </>
