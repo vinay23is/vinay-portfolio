@@ -33,6 +33,30 @@ const PROJECTS = [
   },
   {
     num: "04",
+    name: "Customer Intent Router",
+    tags: ["Python", "FastAPI", "LangChain", "Gemini", "Pydantic"],
+    desc: "LLM router that classifies support messages by intent and dispatches each to a specialized agent — FAQ, escalation, offer, follow-up — with schema-constrained outputs, confidence-aware routing, and an offline eval set.",
+    live: "https://github.com/vinay23is/customer-intent-router",
+    github: "https://github.com/vinay23is/customer-intent-router",
+  },
+  {
+    num: "05",
+    name: "StockSense AI",
+    tags: ["React", "FastAPI", "Gemini", "Recharts", "yFinance"],
+    desc: "Full-stack market intelligence dashboard with live prices, RSI/MACD indicators, multi-stock comparison, and plain-English AI commentary from Gemini — plus request-logging middleware and a /metrics endpoint.",
+    live: "https://stocksense-ai-ten.vercel.app",
+    github: "https://github.com/vinay23is/stocksense-ai",
+  },
+  {
+    num: "06",
+    name: "Job Data Ingestion Pipeline",
+    tags: ["AWS Lambda", "S3", "Snowflake", "Snowpipe", "SQL"],
+    desc: "Event-driven ingestion pipeline: Lambda pulls a REST API into S3, Snowpipe auto-loads new files, and Streams + Tasks with LATERAL FLATTEN and MERGE build an analytics-ready table of unique jobs.",
+    live: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
+    github: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
+  },
+  {
+    num: "07",
     name: "Fintech Risk Analytics",
     tags: ["dbt", "DuckDB", "Snowflake", "SQL", "Power BI"],
     desc: "Analytics engineering project with staging/intermediate/mart layers, data quality tests, risk metrics, and dashboard-ready marts.",
@@ -111,8 +135,9 @@ const SKILLS = [
   { category: "Backend", items: ["Java", "Spring Boot", "FastAPI", "REST APIs", "JWT", "WebSocket"] },
   { category: "Data", items: ["PostgreSQL", "Redis", "Kafka", "dbt", "DuckDB", "Snowflake", "SQL"] },
   { category: "ML", items: ["XGBoost", "Scikit-learn", "PyTorch", "TensorFlow Lite", "Feature engineering"] },
+  { category: "AI / LLM", items: ["LangChain", "Gemini", "RAG", "LLM agents", "Pydantic structured output"] },
   { category: "Frontend", items: ["React", "TypeScript", "Vite", "Tailwind", "Streamlit"] },
-  { category: "Infra", items: ["Docker", "Docker Compose", "GitHub Actions", "Prometheus", "Grafana"] },
+  { category: "Infra", items: ["Docker", "Docker Compose", "AWS Lambda", "GitHub Actions", "Prometheus", "Grafana"] },
   { category: "Languages", items: ["Python", "Java", "TypeScript", "JavaScript", "C++"] },
 ];
 
