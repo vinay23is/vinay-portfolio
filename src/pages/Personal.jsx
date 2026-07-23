@@ -1,6 +1,16 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
+// Personal photos — lead each category with real shots, Unsplash as filler
+import ducati from "../assets/ducati.jpg";
+import kawasaki from "../assets/kawasaki.jpg";
+import sneaker1 from "../assets/sneaker1.jpg";
+import sneaker2 from "../assets/sneaker2.jpg";
+import sneaker3 from "../assets/sneaker3.jpg";
+import cinema from "../assets/cinema.jpg";
+import concert from "../assets/concert.jpg";
+import f1 from "../assets/f1.jpg";
+
 // ── Data ────────────────────────────────────────────────────────────────────
 
 const LANGUAGES = [
@@ -19,8 +29,8 @@ const CATEGORIES = [
     rotate: -3,
     size: "large",
     images: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-      "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=400&q=80",
+      ducati,
+      kawasaki,
       "https://images.unsplash.com/photo-1568772585407-9f605780f3f4?w=400&q=80",
       "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400&q=80",
     ],
@@ -47,9 +57,9 @@ const CATEGORIES = [
     rotate: -1.5,
     size: "large",
     images: [
-      "https://images.unsplash.com/photo-1605118287452-f3e319a92c9c?w=400&q=80",
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
-      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&q=80",
+      sneaker1,
+      sneaker2,
+      sneaker3,
       "https://images.unsplash.com/photo-1584735175315-9d5df23be4be?w=400&q=80",
     ],
   },
@@ -75,7 +85,7 @@ const CATEGORIES = [
     rotate: -2.5,
     size: "small",
     images: [
-      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=400&q=80",
+      f1,
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400&q=80",
       "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80",
       "https://images.unsplash.com/photo-1567808291548-fc3ee04dbcf0?w=400&q=80",
@@ -89,7 +99,7 @@ const CATEGORIES = [
     rotate: 1.5,
     size: "medium",
     images: [
-      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80",
+      cinema,
       "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80",
       "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80",
       "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80",
@@ -103,7 +113,7 @@ const CATEGORIES = [
     rotate: -3.5,
     size: "large",
     images: [
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80",
+      concert,
       "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&q=80",
       "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&q=80",
       "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&q=80",
