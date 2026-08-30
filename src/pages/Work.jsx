@@ -69,6 +69,17 @@ const PROJECTS = [
 
 const EXPERIENCE = [
   {
+    id: "bits-and-binaries",
+    company: "Bits and Binaries, Inc.",
+    role: "Research Informatics Analyst",
+    period: "Aug 2026 – Present · Remote",
+    bullets: [
+      "Build Python, SQL, and PySpark ETL workflows on Snowflake and AWS to ingest, transform, and validate research and operational datasets.",
+      "Design scalable pipelines across relational databases, cloud storage, and analytical platforms with layered raw-to-curated processing.",
+      "Work across AWS services (S3, Lambda, RDS, Athena, IAM, CloudWatch) and implement validation and reconciliation checks to improve data reliability.",
+    ],
+  },
+  {
     id: "ku-nccs",
     company: "University of Kansas — NCCS",
     role: "Graduate Research Assistant",
@@ -135,7 +146,7 @@ const EDUCATION = [
 
 const SKILLS = [
   { category: "Backend", items: ["Java", "Spring Boot", "FastAPI", "REST APIs", "JWT", "WebSocket"] },
-  { category: "Data", items: ["PostgreSQL", "Redis", "Kafka", "dbt", "DuckDB", "Snowflake", "SQL"] },
+  { category: "Data", items: ["PostgreSQL", "Redis", "Kafka", "dbt", "DuckDB", "Snowflake", "PySpark", "SQL"] },
   { category: "ML", items: ["XGBoost", "Scikit-learn", "PyTorch", "TensorFlow Lite", "Feature engineering"] },
   { category: "AI / LLM", items: ["LangChain", "Gemini", "RAG", "LLM agents", "Pydantic structured output"] },
   { category: "Frontend", items: ["React", "TypeScript", "Vite", "Tailwind", "Streamlit"] },
