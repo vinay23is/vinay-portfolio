@@ -17,7 +17,7 @@ const LANGUAGES = [
   { name: "Telugu", level: "Native" },
   { name: "Hindi", level: "Fluent" },
   { name: "English", level: "Fluent" },
-  { name: "Japanese", level: "Learning", streak: "190日連続 — 190 day streak and counting" },
+  { name: "Japanese", level: "Learning", streak: "228日連続 — 228 day streak and counting" },
 ];
 
 const CATEGORIES = [
