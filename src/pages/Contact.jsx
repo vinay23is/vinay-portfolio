@@ -112,7 +112,7 @@ export default function Contact() {
           margin: "0 0 4rem",
         }}
       >
-        Open to full-time roles in AI/ML Engineering, Data Science, and Software Engineering.
+        Open to new opportunities in AI/ML Engineering, Data Science, and Software Engineering.
         Open to remote and relocation.
       </motion.p>
 

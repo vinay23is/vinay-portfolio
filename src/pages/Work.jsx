@@ -578,7 +578,7 @@ export default function Work() {
             marginBottom: "3rem",
           }}
         >
-          [ Available for work · Open to relocation ]
+          [ Open to new opportunities · Open to relocation ]
         </motion.div>
 
         {/* Giant name — parallax layer 1 */}
