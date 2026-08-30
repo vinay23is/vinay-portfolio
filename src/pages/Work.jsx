@@ -533,7 +533,7 @@ export default function Work() {
     };
     window.addEventListener("mousemove", onMouseMove);
     return () => window.removeEventListener("mousemove", onMouseMove);
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, rawX, rawY, tagRawX, tagRawY]);
 
   return (
     <div>

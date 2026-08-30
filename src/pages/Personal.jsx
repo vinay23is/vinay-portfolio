@@ -147,15 +147,12 @@ function CountUp({ target, inView }) {
   const [count, setCount] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   const isSpecial = isNaN(parseInt(target));
+  const end = parseInt(target);
 
   useEffect(() => {
-    if (!inView || isSpecial) return;
-    // Show the final number instantly instead of animating it.
-    if (prefersReducedMotion) {
-      setCount(parseInt(target));
-      return;
-    }
-    const end = parseInt(target);
+    // Skip the animation entirely for non-numeric targets, when off-screen,
+    // or when the visitor prefers reduced motion (the final value is derived below).
+    if (!inView || isSpecial || prefersReducedMotion) return;
     const duration = 1600;
     const steps = 50;
     const increment = end / steps;
@@ -170,10 +167,12 @@ function CountUp({ target, inView }) {
       }
     }, duration / steps);
     return () => clearInterval(timer);
-  }, [inView, target, isSpecial, prefersReducedMotion]);
+  }, [inView, end, isSpecial, prefersReducedMotion]);
 
   if (isSpecial) return <>{target}</>;
-  return <>{target.includes("+") ? `${count}+` : count}</>;
+  // Under reduced motion, show the final number instantly without animating state.
+  const value = prefersReducedMotion ? end : count;
+  return <>{target.includes("+") ? `${value}+` : value}</>;
 }
 
 function SectionLabel({ children }) {

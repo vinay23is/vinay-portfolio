@@ -19,10 +19,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
   return (
     <nav
       style={{
@@ -189,6 +185,7 @@ export default function Navbar() {
                   <Link
                     key={link.path}
                     to={link.path}
+                    onClick={() => setMenuOpen(false)}
                     style={{
                       fontFamily: "DM Mono, monospace",
                       fontSize: "0.85rem",
