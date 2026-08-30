@@ -123,7 +123,7 @@ const CATEGORIES = [
 
 const STATS = [
   { num: "4", label: "Languages spoken or learning" },
-  { num: "190", label: "Duolingo streak days (Japanese)" },
+  { num: "228", label: "Duolingo streak days (Japanese)" },
   { num: "0", label: "Dunks owned (yet)" },
   { num: "4+", label: "Live AI apps deployed" },
 ];
@@ -133,7 +133,7 @@ const DAILY = [
   { time: "8:00 AM", activity: "Study / Build" },
   { time: "12:00 PM", activity: "Cook (yes, from scratch)" },
   { time: "1:00 PM", activity: "Deep work / Projects" },
-  { time: "5:30 PM", activity: "Duolingo — 190 day streak 🇯🇵" },
+  { time: "5:30 PM", activity: "Duolingo — 228 day streak 🇯🇵" },
   { time: "6:00 PM", activity: "Gym / Walk" },
   { time: "8:00 PM", activity: "Dinner + decompress" },
   { time: "9:00 PM", activity: "Anime / Series / Movies" },
@@ -547,7 +547,7 @@ export default function Personal() {
         >
           {[
             { label: "Watching", value: "Whatever's on — across all four languages" },
-            { label: "Learning", value: "Japanese (日本語) — 190 day streak" },
+            { label: "Learning", value: "Japanese (日本語) — 228 day streak" },
             { label: "Listening", value: "Music across Telugu, Hindi, English, Japanese" },
           ].map((item, i) => (
             <motion.div
