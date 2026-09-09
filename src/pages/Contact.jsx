@@ -1,18 +1,10 @@
 import { motion } from "framer-motion";
+import { SOCIAL } from "../lib/site";
 
 const LINKS = [
-  {
-    label: "dodlavinay012@gmail.com",
-    href: "mailto:dodlavinay012@gmail.com",
-  },
-  {
-    label: "linkedin.com/in/vinay-dodla-695232213",
-    href: "https://linkedin.com/in/vinay-dodla-695232213",
-  },
-  {
-    label: "github.com/vinay23is",
-    href: "https://github.com/vinay23is",
-  },
+  { label: SOCIAL.email, href: `mailto:${SOCIAL.email}` },
+  { label: SOCIAL.linkedin.replace("https://", ""), href: SOCIAL.linkedin },
+  { label: SOCIAL.github.replace("https://", ""), href: SOCIAL.github },
 ];
 
 function ContactLink({ link, index }) {
@@ -27,13 +19,15 @@ function ContactLink({ link, index }) {
       style={{
         display: "block",
         fontFamily: "DM Mono, monospace",
-        fontSize: "clamp(0.85rem, 2.5vw, 1.1rem)",
+        fontSize: "clamp(0.8rem, 2.5vw, 1.1rem)",
         color: "#f0f0f0",
         textDecoration: "none",
         padding: "1.25rem 0",
         borderBottom: "1px solid #1f1f1f",
         position: "relative",
         overflow: "hidden",
+        overflowWrap: "anywhere",
+        wordBreak: "break-word",
         transition: "color 0.2s ease",
       }}
       onMouseEnter={(e) => {
@@ -105,15 +99,15 @@ export default function Contact() {
         style={{
           fontFamily: "DM Mono, monospace",
           fontSize: "0.8rem",
-          color: "#555555",
+          color: "#b0b0b0",
           textAlign: "center",
           lineHeight: 1.7,
           maxWidth: "480px",
           margin: "0 0 4rem",
         }}
       >
-        Open to new opportunities in AI/ML Engineering, Data Science, and Software Engineering.
-        Open to remote and relocation.
+        Open to software, data, and ML/AI engineering opportunities.
+        Remote or relocation.
       </motion.p>
 
       <div style={{ width: "100%" }}>
@@ -129,13 +123,13 @@ export default function Contact() {
         style={{
           fontFamily: "DM Mono, monospace",
           fontSize: "0.7rem",
-          color: "#555555",
+          color: "#9a9a9a",
           textAlign: "center",
           marginTop: "3rem",
           letterSpacing: "0.1em",
         }}
       >
-        Lawrence, KS · Available now
+        Lawrence, KS · Open to remote &amp; relocation
       </motion.p>
     </div>
   );

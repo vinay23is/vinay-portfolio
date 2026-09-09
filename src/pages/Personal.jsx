@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useDuolingoStreak } from "../hooks/useDuolingoStreak";
 
 // Personal photos — lead each category with real shots, Unsplash as filler
 import ducati from "../assets/ducati.jpg";
@@ -13,11 +14,17 @@ import f1 from "../assets/f1.jpg";
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
-const LANGUAGES = [
+// Streak-dependent copy is built from a single `streak` value (see
+// useDuolingoStreak) so there is exactly one source of truth on the page.
+const buildLanguages = (streak) => [
   { name: "Telugu", level: "Native" },
   { name: "Hindi", level: "Fluent" },
   { name: "English", level: "Fluent" },
-  { name: "Japanese", level: "Learning", streak: "228日連続 — 228 day streak and counting" },
+  {
+    name: "Japanese",
+    level: "Learning",
+    streak: `${streak}日連続 — ${streak} day streak and counting`,
+  },
 ];
 
 const CATEGORIES = [
@@ -121,19 +128,19 @@ const CATEGORIES = [
   },
 ];
 
-const STATS = [
+const buildStats = (streak) => [
   { num: "4", label: "Languages spoken or learning" },
-  { num: "228", label: "Duolingo streak days (Japanese)" },
+  { num: String(streak), label: "Duolingo streak days (Japanese)" },
   { num: "0", label: "Dunks owned (yet)" },
   { num: "4+", label: "Live AI apps deployed" },
 ];
 
-const DAILY = [
+const buildDaily = (streak) => [
   { time: "7:00 AM", activity: "Wake up, resist phone" },
   { time: "8:00 AM", activity: "Study / Build" },
   { time: "12:00 PM", activity: "Cook (yes, from scratch)" },
   { time: "1:00 PM", activity: "Deep work / Projects" },
-  { time: "5:30 PM", activity: "Duolingo — 228 day streak 🇯🇵" },
+  { time: "5:30 PM", activity: `Duolingo — ${streak} day streak 🇯🇵` },
   { time: "6:00 PM", activity: "Gym / Walk" },
   { time: "8:00 PM", activity: "Dinner + decompress" },
   { time: "9:00 PM", activity: "Anime / Series / Movies" },
@@ -181,7 +188,7 @@ function SectionLabel({ children }) {
       style={{
         fontFamily: "DM Mono, monospace",
         fontSize: "0.65rem",
-        color: "#555555",
+        color: "#9a9a9a",
         letterSpacing: "0.2em",
         textTransform: "uppercase",
         display: "block",
@@ -260,6 +267,8 @@ function CategoryTile({ cat, index }) {
           key={src}
           src={src}
           alt=""
+          loading="lazy"
+          decoding="async"
           onError={() => dropImage(src)}
           style={{
             position: "absolute",
@@ -332,6 +341,13 @@ export default function Personal() {
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true });
 
+  // One streak value drives every mention on the page. Live from Duolingo when
+  // available, otherwise the static fallback (238).
+  const { streak, isLive } = useDuolingoStreak();
+  const languages = buildLanguages(streak);
+  const stats = buildStats(streak);
+  const daily = buildDaily(streak);
+
   return (
     <div>
       {/* HERO */}
@@ -382,7 +398,7 @@ export default function Personal() {
           style={{
             fontFamily: "DM Mono, monospace",
             fontSize: "0.8rem",
-            color: "#555555",
+            color: "#9a9a9a",
             margin: 0,
             fontStyle: "italic",
           }}
@@ -424,7 +440,7 @@ export default function Personal() {
             gap: "1rem",
           }}
         >
-          {LANGUAGES.map((lang, i) => (
+          {languages.map((lang, i) => (
             <motion.div
               key={lang.name}
               initial={{ opacity: 0, y: 20 }}
@@ -475,11 +491,37 @@ export default function Personal() {
                   style={{
                     fontFamily: "DM Mono, monospace",
                     fontSize: "0.68rem",
-                    color: "#555555",
+                    color: "#9a9a9a",
                     lineHeight: 1.5,
                   }}
                 >
                   {lang.streak}
+                </span>
+              )}
+              {lang.name === "Japanese" && isLive && (
+                <span
+                  title="Fetched live from Duolingo"
+                  style={{
+                    fontFamily: "DM Mono, monospace",
+                    fontSize: "0.6rem",
+                    color: "#e8ff47",
+                    letterSpacing: "0.06em",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.35rem",
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "6px",
+                      height: "6px",
+                      borderRadius: "50%",
+                      backgroundColor: "#e8ff47",
+                      display: "inline-block",
+                    }}
+                  />
+                  Live from Duolingo
                 </span>
               )}
             </motion.div>
@@ -546,7 +588,7 @@ export default function Personal() {
         >
           {[
             { label: "Watching", value: "Whatever's on — across all four languages" },
-            { label: "Learning", value: "Japanese (日本語) — 228 day streak" },
+            { label: "Learning", value: `Japanese (日本語) — ${streak} day streak` },
             { label: "Listening", value: "Music across Telugu, Hindi, English, Japanese" },
           ].map((item, i) => (
             <motion.div
@@ -601,7 +643,7 @@ export default function Personal() {
             gap: "2rem",
           }}
         >
-          {STATS.map((stat, i) => (
+          {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
@@ -625,7 +667,7 @@ export default function Personal() {
                 style={{
                   fontFamily: "DM Mono, monospace",
                   fontSize: "0.7rem",
-                  color: "#555555",
+                  color: "#9a9a9a",
                   letterSpacing: "0.06em",
                 }}
               >
@@ -663,7 +705,7 @@ export default function Personal() {
         </motion.h2>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {DAILY.map((entry, i) => (
+          {daily.map((entry, i) => (
             <motion.div
               key={entry.time}
               initial={{ opacity: 0, x: -20 }}
@@ -675,7 +717,7 @@ export default function Personal() {
                 gridTemplateColumns: "100px 1fr",
                 gap: "2rem",
                 padding: "0.9rem 0",
-                borderBottom: i < DAILY.length - 1 ? "1px solid #1f1f1f" : "none",
+                borderBottom: i < daily.length - 1 ? "1px solid #1f1f1f" : "none",
                 alignItems: "center",
               }}
             >

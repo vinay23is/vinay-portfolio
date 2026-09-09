@@ -19,6 +19,11 @@ export default function Cursor() {
   useEffect(() => {
     if (isTouch) return;
 
+    // Only now — once the custom cursor is actually running — tell CSS it's safe
+    // to hide the native cursor. If this component never mounts, the native
+    // cursor stays and the site remains usable.
+    document.documentElement.classList.add("custom-cursor");
+
     const onMove = (e) => {
       rawX.set(e.clientX);
       rawY.set(e.clientY);
@@ -44,6 +49,7 @@ export default function Cursor() {
     document.addEventListener("mouseout", onOut);
 
     return () => {
+      document.documentElement.classList.remove("custom-cursor");
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);

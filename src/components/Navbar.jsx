@@ -77,7 +77,7 @@ export default function Navbar() {
                 style={{
                   fontFamily: "DM Mono, monospace",
                   fontSize: "0.75rem",
-                  color: isActive ? "#f0f0f0" : "#555555",
+                  color: isActive ? "#f0f0f0" : "#9a9a9a",
                   textDecoration: "none",
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
@@ -112,7 +112,7 @@ export default function Navbar() {
             style={{
               fontFamily: "DM Mono, monospace",
               fontSize: "0.7rem",
-              color: "#555555",
+              color: "#9a9a9a",
               letterSpacing: "0.06em",
             }}
             className="location-text"
@@ -130,7 +130,9 @@ export default function Navbar() {
               gap: "5px",
             }}
             className="hamburger"
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -169,6 +171,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

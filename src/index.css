@@ -13,12 +13,47 @@
 }
 
 * {
-  cursor: none !important;
   box-sizing: border-box;
+}
+
+/* Hide the native cursor ONLY when:
+   - the device has a fine, hover-capable pointer (mouse/trackpad), AND
+   - the custom Cursor component actually mounted (adds .custom-cursor to <html>).
+   If JS fails or is disabled, .custom-cursor is never added, so the native
+   cursor stays and the site remains usable. Touch devices keep their cursor. */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor,
+  html.custom-cursor * {
+    cursor: none;
+  }
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Visible keyboard focus for interactive elements. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #e8ff47;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect reduced-motion: kill smooth scroll and any CSS transitions/animations.
+   (Framer Motion animations are separately gated via MotionConfig reducedMotion.) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 body {
@@ -56,4 +91,27 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555555;
+}
+
+/* Featured project card layout. Defined here (not inline) so the responsive
+   collapse below actually applies — inline styles can't be overridden by a
+   media query. */
+.project-card {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    grid-template-columns: 44px 1fr;
+    gap: 0.75rem 1.25rem;
+    padding: 1.5rem !important;
+  }
+  /* Links drop to their own full-width row so nothing squeezes or overflows. */
+  .project-card .project-links {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
 }

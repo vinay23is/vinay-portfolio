@@ -8,12 +8,14 @@ const ParticleBackground = lazy(() => import("../components/ParticleBackground")
 const HERO_LINE1 = "VINAY".split("");
 const HERO_LINE2 = "DODLA".split("");
 
-const PROJECTS = [
+// Featured work — ordered to show range across backend, data engineering,
+// distributed systems, and applied AI/ML in the first few cards.
+const FEATURED_PROJECTS = [
   {
     num: "01",
     name: "PulseOps",
-    tags: ["Java", "Spring Boot", "Redis", "PostgreSQL", "React"],
-    desc: "API monitoring and incident alerting platform with JWT auth, Redis-backed workers, status pages, observability, and Docker deployment.",
+    tags: ["Java", "Spring Boot", "Redis", "PostgreSQL", "Docker", "React"],
+    desc: "API uptime-monitoring and incident-alerting platform. Redis-backed workers poll registered endpoints on a schedule, persist results to Postgres, and raise alerts when a service degrades. JWT auth, public status pages, a /metrics endpoint, and Docker Compose deployment.",
     live: "https://pulseops-frontend.onrender.com",
     github: "https://github.com/vinay23is/pulseops-api-monitoring-paas",
   },
@@ -21,58 +23,65 @@ const PROJECTS = [
     num: "02",
     name: "Fraud Detection Pipeline",
     tags: ["Python", "Kafka", "Redis", "XGBoost", "FastAPI"],
-    desc: "Real-time transaction scoring system with online velocity features, model artifact versioning, API inference, and dashboard metrics.",
+    desc: "Real-time transaction scoring. Kafka streams transactions, Redis holds rolling per-account velocity features computed on the fly, and an XGBoost model behind FastAPI scores each event. Model artifacts are versioned and a dashboard tracks live scoring metrics.",
     live: "https://fraud-detection-pipeline-pdv9.onrender.com/docs",
     github: "https://github.com/vinay23is/fraud-detection-pipeline",
   },
   {
     num: "03",
-    name: "Distributed Chat",
-    tags: ["Java", "WebSocket", "Redis Pub/Sub", "Kafka", "PostgreSQL"],
-    desc: "Horizontally scaled chat platform where Redis Pub/Sub relays WebSocket events across backend instances and Kafka handles durable notifications.",
-    live: "https://github.com/vinay23is/distributed-chat-system",
-    github: "https://github.com/vinay23is/distributed-chat-system",
+    name: "Job Data Ingestion Pipeline",
+    tags: ["AWS Lambda", "S3", "Snowflake", "Snowpipe", "SQL"],
+    desc: "Event-driven data pipeline on AWS and Snowflake. A Lambda pulls a jobs REST API into S3, Snowpipe auto-loads each new file, and Snowflake Streams + Tasks run LATERAL FLATTEN and MERGE to keep a deduplicated, analytics-ready table current with no manual steps.",
+    live: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
+    github: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
   },
   {
     num: "04",
-    name: "Customer Intent Router",
-    tags: ["Python", "FastAPI", "LangChain", "Gemini", "Pydantic"],
-    desc: "LLM router that classifies support messages by intent and dispatches each to a specialized agent — FAQ, escalation, offer, follow-up — with schema-constrained outputs, confidence-aware routing, and an offline eval set.",
-    live: "https://github.com/vinay23is/customer-intent-router",
-    github: "https://github.com/vinay23is/customer-intent-router",
+    name: "Distributed Chat",
+    tags: ["Java", "WebSocket", "Redis Pub/Sub", "Kafka", "PostgreSQL"],
+    desc: "Horizontally scaled chat backend. Redis Pub/Sub fans WebSocket messages out across multiple server instances so users on different nodes stay in sync, Kafka handles durable notification delivery, and Postgres stores message history.",
+    live: "https://github.com/vinay23is/distributed-chat-system",
+    github: "https://github.com/vinay23is/distributed-chat-system",
   },
   {
     num: "05",
     name: "StockSense AI",
     tags: ["React", "FastAPI", "Gemini", "Recharts", "yFinance"],
-    desc: "Full-stack market intelligence dashboard with live prices, RSI/MACD indicators, multi-stock comparison, and plain-English AI commentary from Gemini — plus request-logging middleware and a /metrics endpoint.",
+    desc: "Full-stack market dashboard. A FastAPI backend pulls live quotes, computes RSI/MACD, and asks Gemini for plain-English commentary; a React front end charts it and compares multiple tickers. Request-logging middleware and a /metrics endpoint on the API.",
     live: "https://stocksense-ai-ten.vercel.app",
     github: "https://github.com/vinay23is/stocksense-ai",
   },
+];
+
+// Additional work — still real, kept discoverable below the featured set.
+const MORE_PROJECTS = [
   {
     num: "06",
-    name: "Job Data Ingestion Pipeline",
-    tags: ["AWS Lambda", "S3", "Snowflake", "Snowpipe", "SQL"],
-    desc: "Event-driven ingestion pipeline: Lambda pulls a REST API into S3, Snowpipe auto-loads new files, and Streams + Tasks with LATERAL FLATTEN and MERGE build an analytics-ready table of unique jobs.",
-    live: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
-    github: "https://github.com/vinay23is/automated-job-data-ingestion-pipeline",
+    name: "Customer Intent Router",
+    tags: ["Python", "FastAPI", "LangChain", "Gemini", "Pydantic"],
+    desc: "LLM router that classifies support messages by intent and dispatches each to a specialized agent — FAQ, escalation, offer, follow-up — with schema-constrained Pydantic outputs, confidence-aware routing, and an offline eval set.",
+    live: "https://github.com/vinay23is/customer-intent-router",
+    github: "https://github.com/vinay23is/customer-intent-router",
   },
   {
     num: "07",
     name: "Fintech Risk Analytics",
     tags: ["dbt", "DuckDB", "Snowflake", "SQL", "Power BI"],
-    desc: "Analytics engineering project with staging/intermediate/mart layers, data quality tests, risk metrics, and dashboard-ready marts.",
+    desc: "Analytics-engineering project: dbt models layered staging → intermediate → marts on DuckDB/Snowflake, with data-quality tests and dashboard-ready risk metrics.",
     live: "https://github.com/vinay23is/fintech-risk-analytics-platform",
     github: "https://github.com/vinay23is/fintech-risk-analytics-platform",
   },
 ];
 
+// group: "relevant" = engineering / data / research roles (given prominence);
+// "additional" = campus jobs kept for completeness but de-emphasized.
 const EXPERIENCE = [
   {
     id: "bits-and-binaries",
     company: "Bits and Binaries, Inc.",
     role: "Research Informatics Analyst",
     period: "Aug 2026 – Present · Remote",
+    group: "relevant",
     bullets: [
       "Build Python, SQL, and PySpark ETL workflows on Snowflake and AWS to ingest, transform, and validate research and operational datasets.",
       "Design scalable pipelines across relational databases, cloud storage, and analytical platforms with layered raw-to-curated processing.",
@@ -84,6 +93,7 @@ const EXPERIENCE = [
     company: "University of Kansas — NCCS",
     role: "Graduate Research Assistant",
     period: "Jan 2024 – Jan 2025",
+    group: "relevant",
     bullets: [
       "Developed 3D visual simulations for robotic construction systems using OpenGL and C++.",
       "Built Python data analysis and visualization pipelines.",
@@ -91,10 +101,21 @@ const EXPERIENCE = [
     ],
   },
   {
+    id: "ltimindtree",
+    company: "LTIMindtree",
+    role: "Software Engineering Intern",
+    period: "Jan 2023 – May 2023 · Pune, India",
+    group: "relevant",
+    bullets: [
+      "Built features using Java, Python, and JavaScript in collaborative agile workflows.",
+    ],
+  },
+  {
     id: "ku-grader",
     company: "University of Kansas",
     role: "Grader — MATH 126 (Calculus)",
     period: "Jan 2024 – Jan 2025",
+    group: "additional",
     bullets: [
       "Evaluated assignments and exams with accuracy.",
       "Provided constructive feedback to students.",
@@ -105,6 +126,7 @@ const EXPERIENCE = [
     company: "University of Kansas",
     role: "FAFSA Advisor",
     period: "May 2024 – Aug 2024",
+    group: "additional",
     bullets: [
       "Guided students and families through FAFSA completion via virtual and in-person sessions.",
       "Improved completion outcomes through direct outreach.",
@@ -115,18 +137,10 @@ const EXPERIENCE = [
     company: "University of Kansas",
     role: "IT Student Technician",
     period: "Aug 2023 – Jan 2024",
+    group: "additional",
     bullets: [
       "Resolved IT issues via calls and chat.",
       "Installed operating systems and reimaged library loaner laptops.",
-    ],
-  },
-  {
-    id: "ltimindtree",
-    company: "LTIMindtree",
-    role: "Software Engineering Intern",
-    period: "Jan 2023 – May 2023 · Pune, India",
-    bullets: [
-      "Built features using Java, Python, and JavaScript in collaborative agile workflows.",
     ],
   },
 ];
@@ -214,6 +228,7 @@ function ProjectCard({ project, index }) {
   return (
     <motion.div
       ref={ref}
+      className="project-card"
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -221,10 +236,6 @@ function ProjectCard({ project, index }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative",
-        display: "grid",
-        gridTemplateColumns: "80px 1fr auto",
-        gap: "2rem",
-        alignItems: "center",
         padding: "2rem",
         border: "1px solid #1f1f1f",
         borderLeft: hovered ? "3px solid #e8ff47" : "1px solid #1f1f1f",
@@ -281,26 +292,26 @@ function ProjectCard({ project, index }) {
           style={{
             fontFamily: "DM Mono, monospace",
             fontSize: "0.8rem",
-            color: "#555555",
+            color: "#b0b0b0",
             margin: 0,
             lineHeight: 1.6,
-            maxWidth: "520px",
+            maxWidth: "560px",
           }}
         >
           {project.desc}
         </p>
       </div>
 
-      <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      <div className="project-links" style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         {project.live && project.live !== project.github && (
           <a
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${project.name} — live site`}
-            style={{ color: "#555555", transition: "color 0.2s" }}
+            style={{ color: "#9a9a9a", transition: "color 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#e8ff47")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#9a9a9a")}
             title="Live site"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">
@@ -315,9 +326,9 @@ function ProjectCard({ project, index }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${project.name} — GitHub repository`}
-          style={{ color: "#555555", transition: "color 0.2s" }}
+          style={{ color: "#9a9a9a", transition: "color 0.2s" }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#e8ff47")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#9a9a9a")}
           title="GitHub"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
@@ -325,19 +336,100 @@ function ProjectCard({ project, index }) {
           </svg>
         </a>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .project-card-grid {
-            grid-template-columns: 50px 1fr !important;
-          }
-        }
-      `}</style>
     </motion.div>
   );
 }
 
-function ExperienceEntry({ item, index }) {
+function MoreProjectCard({ project, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.75rem",
+        padding: "1.5rem",
+        border: "1px solid #1f1f1f",
+        borderRadius: "2px",
+        backgroundColor: hovered ? "#111111" : "transparent",
+        transition: "background-color 0.25s ease, border-color 0.25s ease",
+        borderColor: hovered ? "#e8ff4755" : "#1f1f1f",
+        height: "100%",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+        <h3
+          style={{
+            fontFamily: "Syne, sans-serif",
+            fontSize: "1.15rem",
+            fontWeight: 700,
+            color: "#f0f0f0",
+            margin: 0,
+          }}
+        >
+          {project.name}
+        </h3>
+        <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexShrink: 0 }}>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.name} — GitHub repository`}
+            style={{ color: "#9a9a9a", transition: "color 0.2s", display: "inline-flex" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e8ff47")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#9a9a9a")}
+            title="GitHub"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+        {project.tags.map((tag) => (
+          <span
+            key={tag}
+            style={{
+              fontFamily: "DM Mono, monospace",
+              fontSize: "0.6rem",
+              color: "#9a9a9a",
+              border: "1px solid #2a2a2a",
+              borderRadius: "100px",
+              padding: "2px 9px",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+      <p
+        style={{
+          fontFamily: "DM Mono, monospace",
+          fontSize: "0.75rem",
+          color: "#b0b0b0",
+          margin: 0,
+          lineHeight: 1.6,
+        }}
+      >
+        {project.desc}
+      </p>
+    </motion.div>
+  );
+}
+
+function ExperienceEntry({ item, index, compact = false }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -372,7 +464,7 @@ function ExperienceEntry({ item, index }) {
         <span
           style={{
             fontFamily: "Syne, sans-serif",
-            fontSize: "1.05rem",
+            fontSize: compact ? "0.95rem" : "1.05rem",
             fontWeight: 700,
             color: "#f0f0f0",
           }}
@@ -383,7 +475,7 @@ function ExperienceEntry({ item, index }) {
           style={{
             fontFamily: "DM Mono, monospace",
             fontSize: "0.72rem",
-            color: "#e8ff47",
+            color: compact ? "#b0b0b0" : "#e8ff47",
           }}
         >
           {item.role}
@@ -392,7 +484,7 @@ function ExperienceEntry({ item, index }) {
           style={{
             fontFamily: "DM Mono, monospace",
             fontSize: "0.68rem",
-            color: "#555555",
+            color: "#9a9a9a",
             marginBottom: "0.4rem",
           }}
         >
@@ -477,7 +569,7 @@ function EducationEntry({ item, index }) {
           style={{
             fontFamily: "DM Mono, monospace",
             fontSize: "0.68rem",
-            color: "#555555",
+            color: "#9a9a9a",
           }}
         >
           {item.period}
@@ -493,7 +585,7 @@ function SectionLabel({ children }) {
       style={{
         fontFamily: "DM Mono, monospace",
         fontSize: "0.65rem",
-        color: "#555555",
+        color: "#9a9a9a",
         letterSpacing: "0.2em",
         textTransform: "uppercase",
         display: "block",
@@ -569,7 +661,7 @@ export default function Work() {
             zIndex: 1,
             fontFamily: "DM Mono, monospace",
             fontSize: "11px",
-            color: "#555555",
+            color: "#9a9a9a",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             border: "1px solid #2a2a2a",
@@ -630,8 +722,8 @@ export default function Work() {
           </div>
         </motion.div>
 
-        {/* Subtitle — parallax layer 2 (half speed) */}
-        <motion.p
+        {/* Positioning — parallax layer 2 (half speed) */}
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
@@ -640,17 +732,39 @@ export default function Work() {
             y: tagY,
             position: "relative",
             zIndex: 1,
-            fontFamily: "DM Mono, monospace",
-            fontSize: "13px",
-            color: "#555555",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
             textAlign: "center",
             marginBottom: "3rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.75rem",
+            alignItems: "center",
           }}
         >
-          MS Computer Science &nbsp;·&nbsp; Software Engineer &nbsp;·&nbsp; Builder
-        </motion.p>
+          <span
+            style={{
+              fontFamily: "Syne, sans-serif",
+              fontSize: "clamp(1.1rem, 2.4vw, 1.6rem)",
+              fontWeight: 700,
+              color: "#f0f0f0",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Software &amp; Data Engineer
+          </span>
+          <span
+            style={{
+              fontFamily: "DM Mono, monospace",
+              fontSize: "clamp(11px, 1.4vw, 13px)",
+              color: "#b0b0b0",
+              letterSpacing: "0.06em",
+              lineHeight: 1.6,
+              maxWidth: "34rem",
+            }}
+          >
+            MS Computer Science. I build backend services, data pipelines, and
+            applied AI/ML — from API design to production deployment.
+          </span>
+        </motion.div>
 
         {/* CTA Buttons — no parallax */}
         <motion.div
@@ -708,8 +822,37 @@ export default function Work() {
         </motion.h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          {PROJECTS.map((project, i) => (
+          {FEATURED_PROJECTS.map((project, i) => (
             <ProjectCard key={project.num} project={project} index={i} />
+          ))}
+        </div>
+
+        {/* More projects — kept discoverable, visually lighter */}
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.7rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            margin: "3.5rem 0 1.5rem",
+          }}
+        >
+          More projects
+        </motion.h3>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {MORE_PROJECTS.map((project, i) => (
+            <MoreProjectCard key={project.num} project={project} index={i} />
           ))}
         </div>
       </section>
@@ -739,6 +882,19 @@ export default function Work() {
           Experience
         </motion.h2>
 
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            display: "block",
+            marginBottom: "1.75rem",
+          }}
+        >
+          Relevant / Technical
+        </span>
         <div
           style={{
             position: "relative",
@@ -759,8 +915,47 @@ export default function Work() {
               backgroundColor: "#1f1f1f",
             }}
           />
-          {EXPERIENCE.map((item, i) => (
+          {EXPERIENCE.filter((e) => e.group === "relevant").map((item, i) => (
             <ExperienceEntry key={item.id} item={item} index={i} />
+          ))}
+        </div>
+
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            display: "block",
+            margin: "3.5rem 0 1.75rem",
+          }}
+        >
+          Additional Experience
+        </span>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+            paddingLeft: "1rem",
+            opacity: 0.78,
+          }}
+        >
+          {/* Vertical line */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "1px",
+              backgroundColor: "#1f1f1f",
+            }}
+          />
+          {EXPERIENCE.filter((e) => e.group === "additional").map((item, i) => (
+            <ExperienceEntry key={item.id} item={item} index={i} compact />
           ))}
         </div>
       </section>
