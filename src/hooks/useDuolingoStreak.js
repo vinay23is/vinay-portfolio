@@ -5,8 +5,8 @@ import { FALLBACK_STREAK } from "../lib/site";
 // Personal page.
 //
 // Behaviour:
-//   - initialises to the static FALLBACK_STREAK (238) so the UI never renders
-//     0 or an empty/loading value
+//   - initialises to the static FALLBACK_STREAK (see lib/site) so the UI never
+//     renders 0 or an empty/loading value
 //   - fetches /api/duolingo once on mount
 //   - swaps in the real streak only when the proxy reports source === "duolingo"
 //   - keeps the fallback on any failure (network, timeout, unmount, bad shape)

@@ -9,7 +9,7 @@
 // no auth secret is ever required or sent. If nothing is configured, or Duolingo
 // is unreachable / changes shape, the frontend falls back to the static value.
 
-const FALLBACK_STREAK = 238;
+const FALLBACK_STREAK = 239;
 const DUOLINGO_BASE = "https://www.duolingo.com/2017-06-30/users";
 const TIMEOUT_MS = 6000;
 

@@ -2,8 +2,10 @@
 // values that were previously duplicated across pages.
 
 // Static Japanese Duolingo streak. Used as the initial render value and the
-// fallback whenever the live /api/duolingo lookup is unavailable.
-export const FALLBACK_STREAK = 238;
+// fallback whenever the live /api/duolingo lookup is unavailable. Kept roughly
+// current as a baseline; the live value from /api/duolingo overrides it when
+// DUOLINGO_USERNAME is configured.
+export const FALLBACK_STREAK = 239;
 
 export const SOCIAL = {
   email: "dodlavinay012@gmail.com",

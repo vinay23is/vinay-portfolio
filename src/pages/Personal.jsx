@@ -342,7 +342,7 @@ export default function Personal() {
   const statsInView = useInView(statsRef, { once: true });
 
   // One streak value drives every mention on the page. Live from Duolingo when
-  // available, otherwise the static fallback (238).
+  // available, otherwise the static fallback (239).
   const { streak, isLive } = useDuolingoStreak();
   const languages = buildLanguages(streak);
   const stats = buildStats(streak);

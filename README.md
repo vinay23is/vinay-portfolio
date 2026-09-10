@@ -45,7 +45,7 @@ configured.
   handles non-200s and malformed JSON, and never sends or exposes any password,
   JWT, or auth secret. Responses are CDN-cached (~6h) since a streak changes at
   most once a day.
-- **Hook:** `useDuolingoStreak` initialises to the static fallback (**238**),
+- **Hook:** `useDuolingoStreak` initialises to the static fallback (**239**),
   fetches `/api/duolingo` once, and swaps in the real value only when the proxy
   reports `source === "duolingo"`. On any failure it keeps the fallback and
   never renders `0`. A small "Live from Duolingo" badge appears **only** when
@@ -61,11 +61,11 @@ Variables**, then redeploy:
 | `DUOLINGO_USERNAME` | recommended | Your public Duolingo username. |
 | `DUOLINGO_USER_ID` | optional | Numeric user id; used instead of the username if set. |
 
-If **neither** is set, the endpoint returns the static fallback (238) and the
+If **neither** is set, the endpoint returns the static fallback (239) and the
 site works exactly the same, just without the live badge.
 
 > **Limitation:** Duolingo's endpoint is undocumented and unofficial. If it
-> changes shape, rate-limits, or goes away, the proxy falls back to 238 rather
+> changes shape, rate-limits, or goes away, the proxy falls back to 239 rather
 > than breaking the page. It is read-only profile data only.
 
 ## Local development
@@ -79,4 +79,4 @@ npm run preview  # preview the production build
 ```
 
 The `/api/duolingo` function runs on Vercel; in plain `vite dev` the hook simply
-falls back to 238 (use `vercel dev` if you want to exercise the function locally).
+falls back to 239 (use `vercel dev` if you want to exercise the function locally).
