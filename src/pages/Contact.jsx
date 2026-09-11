@@ -106,8 +106,8 @@ export default function Contact() {
           margin: "0 0 4rem",
         }}
       >
-        Open to software, data, and ML/AI engineering opportunities.
-        Remote or relocation.
+        Open to software, data, and ML/AI engineering opportunities, as well as
+        research collaborations and PhD opportunities in applied AI and computing.
       </motion.p>
 
       <div style={{ width: "100%" }}>

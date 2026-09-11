@@ -1,6 +1,6 @@
 # Vinay Dodla — Portfolio
 
-Personal portfolio site for software, data, and ML/AI engineering roles.
+Personal portfolio site for software, data, and ML/AI engineering roles, as well as research collaborations and PhD applications in applied AI and computing.
 
 **Live:** [vinay-portfolio-dusky.vercel.app](https://vinay-portfolio-dusky.vercel.app)
 

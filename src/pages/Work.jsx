@@ -92,7 +92,7 @@ const EXPERIENCE = [
     id: "ku-nccs",
     company: "University of Kansas — NCCS",
     role: "Graduate Research Assistant",
-    period: "Jan 2024 – Jan 2025",
+    period: "Jan 2024 – May 2024",
     group: "relevant",
     bullets: [
       "Developed 3D visual simulations for robotic construction systems using OpenGL and C++.",
@@ -142,6 +142,34 @@ const EXPERIENCE = [
       "Resolved IT issues via calls and chat.",
       "Installed operating systems and reimaged library loaner laptops.",
     ],
+  },
+];
+
+// Research roles. Kept concise — the Experience section already lists the KU
+// role; this frames the same work in a research context for reviewers.
+const RESEARCH = [
+  {
+    id: "ku-nccs-research",
+    company: "University of Kansas — NCCS",
+    role: "Graduate Research Assistant",
+    period: "Jan 2024 – May 2024",
+    bullets: [
+      "Robotic construction / automated construction simulation.",
+      "Python and C++ with OpenGL-based 3D simulation.",
+      "Data analysis and visualization, collaborating across computer science and engineering.",
+    ],
+  },
+];
+
+// Publications. Structured as a list so more can be added later. Only fields
+// that are verified are shown — no invented DOI, author order, or links.
+const PUBLICATIONS = [
+  {
+    id: "telugu-ocr-dl",
+    title: "Isolated Telugu Language Character Recognition Using Deep Learning",
+    venue: "Springer Nature Singapore",
+    year: "2024",
+    type: "Book chapter",
   },
 ];
 
@@ -425,6 +453,73 @@ function MoreProjectCard({ project, index }) {
       >
         {project.desc}
       </p>
+    </motion.div>
+  );
+}
+
+function PublicationCard({ pub, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.6rem",
+        padding: "1.5rem",
+        border: "1px solid #1f1f1f",
+        borderRadius: "2px",
+        backgroundColor: hovered ? "#111111" : "transparent",
+        transition: "background-color 0.25s ease, border-color 0.25s ease",
+        borderColor: hovered ? "#e8ff4755" : "#1f1f1f",
+        height: "100%",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "DM Mono, monospace",
+          fontSize: "0.6rem",
+          color: "#e8ff47",
+          border: "1px solid #e8ff47",
+          borderRadius: "100px",
+          padding: "2px 9px",
+          letterSpacing: "0.05em",
+          textTransform: "uppercase",
+          alignSelf: "flex-start",
+        }}
+      >
+        {pub.type}
+      </span>
+      <h3
+        style={{
+          fontFamily: "Syne, sans-serif",
+          fontSize: "1.05rem",
+          fontWeight: 700,
+          color: "#f0f0f0",
+          margin: 0,
+          lineHeight: 1.35,
+        }}
+      >
+        {pub.title}
+      </h3>
+      <span
+        style={{
+          fontFamily: "DM Mono, monospace",
+          fontSize: "0.72rem",
+          color: "#9a9a9a",
+          lineHeight: 1.5,
+        }}
+      >
+        {pub.venue} · {pub.year}
+      </span>
     </motion.div>
   );
 }
@@ -749,7 +844,7 @@ export default function Work() {
               letterSpacing: "-0.01em",
             }}
           >
-            Software &amp; Data Engineer
+            AI, Data &amp; Software Engineer
           </span>
           <span
             style={{
@@ -762,7 +857,8 @@ export default function Work() {
             }}
           >
             MS Computer Science. I build backend services, data pipelines, and
-            applied AI/ML — from API design to production deployment.
+            applied AI/ML — from research prototypes and data systems to
+            production deployment.
           </span>
         </motion.div>
 
@@ -960,6 +1056,96 @@ export default function Work() {
         </div>
       </section>
 
+      {/* RESEARCH & PUBLICATIONS */}
+      <section
+        id="research-section"
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "4rem 2rem 6rem",
+        }}
+      >
+        <SectionLabel>05 — RESEARCH &amp; PUBLICATIONS</SectionLabel>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{
+            fontFamily: "Syne, sans-serif",
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 700,
+            color: "#f0f0f0",
+            margin: "0 0 3rem",
+          }}
+        >
+          Research &amp; Publications
+        </motion.h2>
+
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            display: "block",
+            marginBottom: "1.75rem",
+          }}
+        >
+          Research
+        </span>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2.5rem",
+            paddingLeft: "1rem",
+          }}
+        >
+          {/* Vertical line */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "1px",
+              backgroundColor: "#1f1f1f",
+            }}
+          />
+          {RESEARCH.map((item, i) => (
+            <ExperienceEntry key={item.id} item={item} index={i} />
+          ))}
+        </div>
+
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            display: "block",
+            margin: "3.5rem 0 1.75rem",
+          }}
+        >
+          Publications
+        </span>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {PUBLICATIONS.map((pub, i) => (
+            <PublicationCard key={pub.id} pub={pub} index={i} />
+          ))}
+        </div>
+      </section>
+
       {/* EDUCATION */}
       <section
         style={{
@@ -968,7 +1154,7 @@ export default function Work() {
           padding: "4rem 2rem 6rem",
         }}
       >
-        <SectionLabel>05 — EDUCATION</SectionLabel>
+        <SectionLabel>06 — EDUCATION</SectionLabel>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1018,7 +1204,7 @@ export default function Work() {
           padding: "4rem 2rem 8rem",
         }}
       >
-        <SectionLabel>06 — SKILLS</SectionLabel>
+        <SectionLabel>07 — SKILLS</SectionLabel>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
