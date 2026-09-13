@@ -457,7 +457,10 @@ function MoreProjectCard({ project, index }) {
   );
 }
 
-function PublicationCard({ pub, index }) {
+// Publications render as a divided list (not a boxed card) so the section
+// reads as an intentional list with a single entry and scales cleanly as more
+// are added. Fonts follow the site system: Syne title, DM Mono metadata.
+function PublicationRow({ pub, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [hovered, setHovered] = useState(false);
@@ -465,7 +468,7 @@ function PublicationCard({ pub, index }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08 }}
       onMouseEnter={() => setHovered(true)}
@@ -473,35 +476,44 @@ function PublicationCard({ pub, index }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "0.6rem",
-        padding: "1.5rem",
-        border: "1px solid #1f1f1f",
-        borderRadius: "2px",
+        gap: "0.55rem",
+        padding: "1.4rem 1.25rem",
+        borderBottom: "1px solid #1f1f1f",
+        borderLeft: hovered ? "2px solid #e8ff47" : "2px solid transparent",
         backgroundColor: hovered ? "#111111" : "transparent",
-        transition: "background-color 0.25s ease, border-color 0.25s ease",
-        borderColor: hovered ? "#e8ff4755" : "#1f1f1f",
-        height: "100%",
+        transition: "background-color 0.25s ease, border-left-color 0.25s ease",
       }}
     >
-      <span
-        style={{
-          fontFamily: "DM Mono, monospace",
-          fontSize: "0.6rem",
-          color: "#e8ff47",
-          border: "1px solid #e8ff47",
-          borderRadius: "100px",
-          padding: "2px 9px",
-          letterSpacing: "0.05em",
-          textTransform: "uppercase",
-          alignSelf: "flex-start",
-        }}
-      >
-        {pub.type}
-      </span>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.6rem",
+            color: "#e8ff47",
+            border: "1px solid #e8ff47",
+            borderRadius: "100px",
+            padding: "2px 9px",
+            letterSpacing: "0.05em",
+            textTransform: "uppercase",
+          }}
+        >
+          {pub.type}
+        </span>
+        <span
+          style={{
+            fontFamily: "DM Mono, monospace",
+            fontSize: "0.68rem",
+            color: "#9a9a9a",
+            letterSpacing: "0.06em",
+          }}
+        >
+          {pub.year}
+        </span>
+      </div>
       <h3
         style={{
           fontFamily: "Syne, sans-serif",
-          fontSize: "1.05rem",
+          fontSize: "1.15rem",
           fontWeight: 700,
           color: "#f0f0f0",
           margin: 0,
@@ -513,12 +525,12 @@ function PublicationCard({ pub, index }) {
       <span
         style={{
           fontFamily: "DM Mono, monospace",
-          fontSize: "0.72rem",
-          color: "#9a9a9a",
+          fontSize: "0.75rem",
+          color: "#b0b0b0",
           lineHeight: 1.5,
         }}
       >
-        {pub.venue} · {pub.year}
+        {pub.venue}
       </span>
     </motion.div>
   );
@@ -1133,15 +1145,9 @@ export default function Work() {
         >
           Publications
         </span>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "1rem",
-          }}
-        >
+        <div style={{ borderTop: "1px solid #1f1f1f", maxWidth: "760px" }}>
           {PUBLICATIONS.map((pub, i) => (
-            <PublicationCard key={pub.id} pub={pub} index={i} />
+            <PublicationRow key={pub.id} pub={pub} index={i} />
           ))}
         </div>
       </section>
