@@ -868,9 +868,8 @@ export default function Work() {
               maxWidth: "34rem",
             }}
           >
-            MS Computer Science. I build backend services, data pipelines, and
-            applied AI/ML — from research prototypes and data systems to
-            production deployment.
+            MS Computer Science. Backend services, data pipelines, applied ML —
+            built to run in production and hold up there.
           </span>
         </motion.div>
 
