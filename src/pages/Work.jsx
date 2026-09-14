@@ -223,7 +223,7 @@ const EDUCATION = [
 const SKILLS = [
   { category: "Backend", items: ["Java", "Spring Boot", "FastAPI", "REST APIs", "JWT", "WebSocket"] },
   { category: "Data", items: ["PostgreSQL", "Redis", "Kafka", "dbt", "DuckDB", "Snowflake", "PySpark", "SQL"] },
-  { category: "ML", items: ["XGBoost", "Scikit-learn", "PyTorch", "TensorFlow Lite", "Feature engineering"] },
+  { category: "ML", items: ["Deep learning", "CNNs", "PyTorch", "TensorFlow Lite", "XGBoost", "Scikit-learn", "Feature engineering"] },
   { category: "AI / LLM", items: ["LangChain", "Gemini", "RAG", "LLM agents", "Pydantic structured output"] },
   { category: "Frontend", items: ["React", "TypeScript", "Vite", "Tailwind", "Streamlit"] },
   { category: "Infra", items: ["Docker", "Docker Compose", "AWS Lambda", "GitHub Actions", "Prometheus", "Grafana"] },
