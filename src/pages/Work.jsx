@@ -161,15 +161,49 @@ const RESEARCH = [
   },
 ];
 
-// Publications. Structured as a list so more can be added later. Only fields
-// that are verified are shown — no invented DOI, author order, or links.
+// Publications. Structured as a list so more can be added later. A `doi` is
+// only set where it was verified to resolve (via doi.org / Crossref); entries
+// without a verified link are shown without one rather than with a broken link.
 const PUBLICATIONS = [
+  {
+    id: "transformer-pulmonary",
+    title:
+      "Compact Transformer Neural Network for Pulmonary Disease Classification from Radiological Imaging",
+    venue: "Intelligent Healthcare and Computational Neural Modelling (ICIHCNN), Springer",
+    year: "2024",
+    type: "Conference paper",
+    doi: "10.1007/978-981-99-2832-3_9",
+  },
+  {
+    id: "harmony-search-dl",
+    title: "Adopting Harmony Search Algorithm in Deep Learning",
+    venue: "Intelligent Healthcare and Computational Neural Modelling (ICIHCNN), Springer",
+    year: "2024",
+    type: "Conference paper",
+    doi: "10.1007/978-981-99-2832-3_71",
+  },
   {
     id: "telugu-ocr-dl",
     title: "Isolated Telugu Language Character Recognition Using Deep Learning",
-    venue: "Springer Nature Singapore",
+    venue: "Intelligent Healthcare and Computational Neural Modelling (ICIHCNN), Springer",
     year: "2024",
-    type: "Book chapter",
+    type: "Conference paper",
+    doi: "10.1007/978-981-99-2832-3_46",
+  },
+  {
+    id: "cnn-alzheimers",
+    title: "Implementation of Convolutional Neural Networks for Detection of Alzheimer's Disease",
+    venue: "BioGecko: A Journal for New Zealand Herpetology, 12(1), 71–82",
+    year: "2023",
+    type: "Journal article",
+  },
+  {
+    id: "cs-teaching-online-learning",
+    title:
+      "The Computer Science Based Teaching Strategy on Impact of a Student Knowledge in Online Learning",
+    venue: "International Journal of Early Childhood Special Education, 14(5), 6349–6356",
+    year: "2022",
+    type: "Journal article",
   },
 ];
 
@@ -509,6 +543,37 @@ function PublicationRow({ pub, index }) {
         >
           {pub.year}
         </span>
+        {pub.doi && (
+          <a
+            href={`https://doi.org/${pub.doi}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${pub.title} — DOI ${pub.doi}`}
+            title={`doi.org/${pub.doi}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.35rem",
+              marginLeft: "auto",
+              fontFamily: "DM Mono, monospace",
+              fontSize: "0.62rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#9a9a9a",
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e8ff47")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#9a9a9a")}
+          >
+            DOI
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true" focusable="false">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        )}
       </div>
       <h3
         style={{
@@ -518,6 +583,7 @@ function PublicationRow({ pub, index }) {
           color: "#f0f0f0",
           margin: 0,
           lineHeight: 1.35,
+          overflowWrap: "anywhere",
         }}
       >
         {pub.title}
@@ -528,6 +594,7 @@ function PublicationRow({ pub, index }) {
           fontSize: "0.75rem",
           color: "#b0b0b0",
           lineHeight: 1.5,
+          overflowWrap: "anywhere",
         }}
       >
         {pub.venue}
